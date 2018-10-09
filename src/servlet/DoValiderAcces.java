@@ -22,12 +22,12 @@ public class DoValiderAcces extends HttpServlet {
 			try {
 				utilisateur = DAOFactory.getUtilisateurDAO().selectById((int) session.getAttribute("idUtilisateur"));
 				if (utilisateur != null) {
-					if (utilisateur.isCollaborateur()) {
+					if (utilisateur.isCollaborateur()) {					
 						req.setAttribute("utilisateur", utilisateur);
-						this.getServletContext().getRequestDispatcher("/admin/gestion.jsp").forward(req, resp);
+						this.getServletContext().getRequestDispatcher("/collaborateur/gestion.jsp").forward(req, resp);
 					} else if (utilisateur.isCandidat()) {
 						req.setAttribute("utilisateur", utilisateur);
-						this.getServletContext().getRequestDispatcher("/user/gestion.jsp").forward(req, resp);
+						this.getServletContext().getRequestDispatcher("/candidat/gestion.jsp").forward(req, resp);
 					}
 				}
 			} catch (DALException e) {

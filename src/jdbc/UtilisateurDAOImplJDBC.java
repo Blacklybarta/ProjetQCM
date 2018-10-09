@@ -158,14 +158,14 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-//				utilisateur = new Utilisateur();
-//				utilisateur.setId(rs.getInt("idUtilisateur"));
-//				utilisateur.setIdentifiant(rs.getString("identifiant"));
-//				utilisateur.setMdp(rs.getString("mdp"));
-//				utilisateur.setNom(rs.getString("nom"));
-//				utilisateur.setPrenom(rs.getString("prenom"));
-//				utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
-//				utilisateur.setConducteur(rs.getBoolean("conducteur"));
+				utilisateur = new Utilisateur();
+				utilisateur.setIdUtilistaeur(rs.getInt("idutilisateur"));
+				utilisateur.setEmail(rs.getString("email"));
+				utilisateur.setPassword(rs.getString("password"));
+				utilisateur.setNom(rs.getString("nom"));
+				utilisateur.setPrenom(rs.getString("prenom"));
+				utilisateur.setCollaborateur(rs.getBoolean("isCollaborateur"));
+				utilisateur.setCandidat(rs.getBoolean("isCandidat"));
 			}
 
 		} catch (Exception e) {
