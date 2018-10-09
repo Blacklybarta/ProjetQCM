@@ -8,8 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import bo.Epreuve;
 import bo.Utilisateur;
-import bo.exceptions.ParameterNullException;
 import dal.DALException;
 import dal.DAO;
 import dal.DBConnection;
@@ -281,6 +281,12 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 
 	@Override
 	public List<Utilisateur> selectAllById(int id) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Epreuve> selectCandidatEpreuve(int id) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}

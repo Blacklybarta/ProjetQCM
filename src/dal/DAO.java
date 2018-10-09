@@ -2,6 +2,8 @@ package dal;
 
 import java.util.List;
 
+import bo.Epreuve;
+
 public interface DAO<T> {
 
 	public void insert(T data) throws DALException ;
@@ -21,5 +23,7 @@ public interface DAO<T> {
 	public T selectByUtilisateur(int id) throws DALException;
 	
 	public List<T> selectAllById(int id) throws DALException;
+	
+	public List<Epreuve> selectCandidatEpreuve(int id) throws DALException;
 	
 }

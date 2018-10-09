@@ -56,29 +56,32 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 		return null;
 	}
 	
-	public Epreuve selectCandidatEpreuve(int idUtilistaeur){
+	public List<Epreuve> selectCandidatEpreuve(int idUtilistaeur){
 		// TODO Auto-generated method stub
 				con = null;
 				pstmt = null;
 				ResultSet rs = null;
-				Epreuve epreuve = null;
 				try {
 					con = DBConnection.getConnection();
 					pstmt = con.prepareStatement(SQL_SELECT_BY_CANDIDAT);
 					pstmt.setInt(1, idUtilistaeur);
 
 					rs = pstmt.executeQuery();
-					if (rs.next()) {
-						epreuve = new Epreuve();
-						epreuve.setIdEpreuve(rs.getInt("idepreuve"));
-						epreuve.setDateDebutValidite(rs.getDate("dateDebutValidite"));
-						epreuve.setDateFinValidite(rs.getDate("dateFinValidite"));
-						epreuve.setTempsEcoule(rs.getInt("tempsEcoule"));
-						epreuve.setEtat(rs.getString("etat"));
-						epreuve.setNoteObtenu(rs.getFloat("note_obtenu"));
-						epreuve.setNiveauObtenu(rs.getString("niveau_obtenu"));
-						//epreuve.setIdTest();
-						//epreuve.setListeQuestions(listeQuestions);
+					while (rs.next())
+					{
+						if (rs.next()) {
+							Epreuve epreuve = new Epreuve();
+							
+							epreuve.setIdEpreuve(rs.getInt("idepreuve"));
+							epreuve.setDateDebutValidite(rs.getDate("dateDebutValidite"));
+							epreuve.setDateFinValidite(rs.getDate("dateFinValidite"));
+							epreuve.setTempsEcoule(rs.getInt("tempsEcoule"));
+							epreuve.setEtat(rs.getString("etat"));
+							epreuve.setNoteObtenu(rs.getFloat("note_obtenu"));
+							epreuve.setNiveauObtenu(rs.getString("niveau_obtenu"));
+							
+							listeEpreuves.add(epreuve);
+						}
 					}
 
 				} catch (Exception e) {
@@ -93,7 +96,7 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 					}
 					closeConnection();
 				}
-				return epreuve;
+				return listeEpreuves;
 	}
 
 	@Override

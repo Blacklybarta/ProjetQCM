@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bo.Epreuve;
 import bo.Utilisateur;
 import dal.DALException;
 import dal.DAOFactory;
@@ -48,14 +51,20 @@ public class DoValiderAcces extends HttpServlet {
 		resp.setHeader("Pragma", "no-cache");
 		resp.setHeader("Expires", "0");
 		Utilisateur utilisateur = null;
+		List<Epreuve> epreuves = new ArrayList<>();
 		try {
 			utilisateur = DAOFactory.getUtilisateurDAO().selectByIdentifiant(email, password);
+			int idUser = utilisateur.getIdUtilistaeur();
+			epreuves = DAOFactory.getEpreuveDAO().selectCandidatEpreuve(idUser);
 			if (utilisateur != null) {
 				if (utilisateur.isCandidat()) {
 					req.setAttribute("utilisateur", utilisateur);
 					session.setAttribute("idUtilisateur", utilisateur.getIdUtilistaeur());
 					session.setAttribute("nomUtilisateur", utilisateur.getNom());
 					session.setAttribute("candidat", utilisateur.isCandidat());
+					
+					session.setAttribute("epreuves", epreuves);
+					
 					this.getServletContext().getRequestDispatcher("/candidat/gestion.jsp").forward(req, resp);
 				} else if (utilisateur.isCollaborateur()) {
 					req.setAttribute("utilisateur", utilisateur);
