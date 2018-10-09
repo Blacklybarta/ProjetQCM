@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<title>Espace personnel - Connexion</title>
+</head>
+<body>
+	<!-- Header -->
+	<header>
+  		<p class="titre1">QCM</p>
+  		<p class="titre2">Connexion</p>
+	</header>
+	
+	<div class="col-xs-12 col-sm-9">
+
+		<!-- Formulaire de connexion -->
+		<div class="contenuAccueil">
+        	<form action="/ProjetQCM/validerAcces" method="post">
+          		<label for="email">EMAIL</label>
+          		<input type="text" name="email" value="" required><br>
+          		<label for="password">MOT DE PASSE</label>
+          		<input type="password" name="password" value="" required><br>
+          		<button type="submit">SE CONNECTER</button>
+        	</form>
+      	</div>
+	</div>
+      	<div class="col-xs-12 col-sm-3">
+      	
+      	<!-- Menu -->
+      	<div class="menu">
+      		<h3>Menu</h3>
+      		<a href="/ProjetQCM">Accueil</a>
+      	</div>
+	</div>
+</body>
+</html>

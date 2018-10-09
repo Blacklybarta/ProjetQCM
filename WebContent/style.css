@@ -1,0 +1,98 @@
+header {
+  background-color: silver;
+  height: 150px;
+  width: 100%;
+  text-align: center;
+}
+
+.titre1 {
+  font-size: 40px;
+  padding-top: 15px;
+}
+
+.titre2 {
+  font-size: 30px;
+}
+
+.contenu, .contenuAccueil {
+  background-color: white;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  padding: 0px;
+  text-align: left;
+  font-size: 20px;
+  line-height: 35px;
+}
+
+.contenuAccueil {
+	padding-top: 20px;
+}
+
+.menu {
+  background-color: #66b3ff;
+  margin-top: 20px;
+  text-align: center;
+  height: 100%;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+}
+
+.menu a {
+	color: white;
+}
+
+.menu a:hover {
+	color: white;
+}
+
+.connecte {
+	font-size: 11px;
+	color: white;
+}
+
+.deplacementEnCours {
+	background-color: silver;
+}
+
+label {
+	width: 400px;
+	vertical-align: top;
+}
+
+.labelCheckbox {
+	width: 150px;
+}
+
+checkbox {
+	margin-right: 30px;
+}
+
+img {
+	width: 100%;
+}
+
+.error {
+	font-size: 25px;
+	color: red;
+	margin-top: 20px;
+}
+
+textarea, input, select {
+	max-width: 100%;
+}
+
+input {
+	height: 30px;
+}
+
+hr {
+	width: 70%;
+}
+
+.recap{
+	background-color: #DCDCDC;
+	border-style: dotted thin;
+}
