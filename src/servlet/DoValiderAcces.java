@@ -41,8 +41,10 @@ public class DoValiderAcces extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String email = req.getParameter("identifiant");
+		String email = req.getParameter("email");
 		String password = req.getParameter("password");
+		System.out.println(email);
+		System.out.println(password);
 		HttpSession session = req.getSession();
 		resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 		resp.setHeader("Pragma", "no-cache");
@@ -50,20 +52,20 @@ public class DoValiderAcces extends HttpServlet {
 		Utilisateur utilisateur = null;
 		try {
 			utilisateur = DAOFactory.getUtilisateurDAO().selectByIdentifiant(email, password);
+			System.out.println(utilisateur);
 			if (utilisateur != null) {
 				if (utilisateur.isCandidat()) {
 					req.setAttribute("utilisateur", utilisateur);
 					session.setAttribute("idUtilisateur", utilisateur.getIdUtilistaeur());
 					session.setAttribute("nomUtilisateur", utilisateur.getNom());
 					session.setAttribute("candidat", utilisateur.isCandidat());
-					//session.setAttribute("administrateur", utilisateur.isCollaborateur());
-					this.getServletContext().getRequestDispatcher("/admin/gestion.jsp").forward(req, resp);
+					this.getServletContext().getRequestDispatcher("/candidat/gestion.jsp").forward(req, resp);
 				} else if (utilisateur.isCollaborateur()) {
 					req.setAttribute("utilisateur", utilisateur);
 					session.setAttribute("idUtilisateur", utilisateur.getIdUtilistaeur());
 					session.setAttribute("nomUtilisateur", utilisateur.getNom());
 					session.setAttribute("collaborateur", utilisateur.isCollaborateur());
-					this.getServletContext().getRequestDispatcher("/user/gestion.jsp").forward(req, resp);
+					this.getServletContext().getRequestDispatcher("/collaborateur/gestion.jsp").forward(req, resp);
 				} else {
 					req.setAttribute("error", "Compte invalide - Ni candidat, Ni formateur");
 					this.getServletContext().getRequestDispatcher("/erreur.jsp").forward(req, resp);
