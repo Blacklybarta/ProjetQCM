@@ -1,13 +1,13 @@
 package bo;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class Epreuve {
 
 	private int idEpreuve;
-	private LocalDate dateDebutValiite;
-	private LocalDate dateFinValidite;
+	private Date dateDebutValidite;
+	private Date dateFinValidite;
 	private int tempsEcoule;
 	private String etat;
 	private float noteObtenu;
@@ -27,19 +27,19 @@ public class Epreuve {
 		this.idEpreuve = idEpreuve;
 	}
 
-	public LocalDate getDateDebutValiite() {
-		return dateDebutValiite;
+	public Date getDateDebutValidite() {
+		return dateDebutValidite;
 	}
 
-	public void setDateDebutValiite(LocalDate dateDebutValiite) {
-		this.dateDebutValiite = dateDebutValiite;
+	public void setDateDebutValidite(Date dateDebutValidite) {
+		this.dateDebutValidite = dateDebutValidite;
 	}
 
-	public LocalDate getDateFinValidite() {
+	public Date getDateFinValidite() {
 		return dateFinValidite;
 	}
 
-	public void setDateFinValidite(LocalDate dateFinValidite) {
+	public void setDateFinValidite(Date dateFinValidite) {
 		this.dateFinValidite = dateFinValidite;
 	}
 
