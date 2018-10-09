@@ -43,8 +43,6 @@ public class DoValiderAcces extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
-		System.out.println(email);
-		System.out.println(password);
 		HttpSession session = req.getSession();
 		resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 		resp.setHeader("Pragma", "no-cache");
@@ -52,7 +50,6 @@ public class DoValiderAcces extends HttpServlet {
 		Utilisateur utilisateur = null;
 		try {
 			utilisateur = DAOFactory.getUtilisateurDAO().selectByIdentifiant(email, password);
-			System.out.println(utilisateur);
 			if (utilisateur != null) {
 				if (utilisateur.isCandidat()) {
 					req.setAttribute("utilisateur", utilisateur);
