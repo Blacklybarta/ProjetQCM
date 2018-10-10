@@ -139,9 +139,9 @@ INSERT INTO [dbo].[epreuve]
            ,56
            ,'T'
            ,8
-           ,'A'
+           ,'NA'
            ,2
-           ,14)
+           ,5)
 GO
 
 INSERT INTO [dbo].[theme]
@@ -150,4 +150,55 @@ INSERT INTO [dbo].[theme]
            ('Comprehension'),
 		   ('Logique'),
 		   ('Connaissances')
+GO
+
+INSERT INTO [dbo].[question]
+           ([enonce]
+           ,[media]
+           ,[points]
+           ,[idTheme])
+     VALUES
+           ('Parmis les affirmations suivantes, sélectionnez la ou les bonnes réponses.'
+           ,NULL
+           ,2
+           ,3),
+		   ('Parmis les affirmations suivantes, sélectionnez la bonne réponse.'
+           ,NULL
+           ,1
+           ,2),
+		   ('John a 10 ans. Son petit frère à la moité de son âge. Dans 10 ans, quel âge aurat le petit frère de John.'
+           ,NULL
+           ,1
+           ,1)
+GO
+
+INSERT INTO [dbo].[proposition]
+           ([enonce]
+           ,[estBonne]
+           ,[idQuestion])
+     VALUES
+           ('2 + 2 = 4'
+           ,1
+           ,1),
+		   ('4 + 2 = 7'
+           ,0
+           ,1),
+		   ('42 - 2 = 40'
+           ,1
+           ,1),
+		   ('71 x 10 + 7 x 0 = 1'
+           ,0
+           ,1),
+		   ('Les chats sont des arachnides.'
+           ,0
+           ,2),
+		   ('Une journée dure 24 heures.'
+           ,1
+           ,2),
+		   ('15 ans'
+           ,1
+           ,3),
+		   ('10 ans'
+           ,0
+           ,3)
 GO
