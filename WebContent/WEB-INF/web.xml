@@ -12,16 +12,14 @@
     <servlet-name>Accueil</servlet-name>
     <url-pattern>/accueil</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>Connexion</servlet-name>
-     <servlet-class>servlet.DoValiderAcces</servlet-class>
+    <servlet-class>servlet.DoValiderAcces</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Connexion</servlet-name>
     <url-pattern>/connexion</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ValiderAcces</servlet-name>
     <servlet-class>servlet.DoValiderAcces</servlet-class>
@@ -30,7 +28,6 @@
     <servlet-name>ValiderAcces</servlet-name>
     <url-pattern>/validerAcces</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>CreerTheme</servlet-name>
     <servlet-class>servlet.theme.DoCreerTheme</servlet-class>
@@ -39,7 +36,6 @@
     <servlet-name>CreerTheme</servlet-name>
     <url-pattern>/collaborateur/addTheme</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ModifierTheme</servlet-name>
     <servlet-class>servlet.theme.DoModifierTheme</servlet-class>
@@ -48,7 +44,6 @@
     <servlet-name>ModifierTheme</servlet-name>
     <url-pattern>/collaborateur/updateTheme</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>SupprimerTheme</servlet-name>
     <servlet-class>servlet.theme.DoSupprimerTheme</servlet-class>
@@ -59,6 +54,33 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>CreerQuestion</servlet-name>
+    <servlet-class>servlet.question.DoCreerQuestion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreerQuestion</servlet-name>
+    <url-pattern>/collaborateur/addQuestion</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>ModifierQuestion</servlet-name>
+    <servlet-class>servlet.question.DoModifierQuestion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifierQuestion</servlet-name>
+    <url-pattern>/collaborateur/updateQuestion</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>SupprimerQuestion</servlet-name>
+    <servlet-class>servlet.question.DoSupprimerQuestion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SupprimerQuestion</servlet-name>
+    <url-pattern>/collaborateur/removeQuestion</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>Deconnexion</servlet-name>
     <servlet-class>servlet.DoLogOut</servlet-class>
   </servlet>
@@ -66,5 +88,4 @@
     <servlet-name>Deconnexion</servlet-name>
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
-  
 </web-app>
