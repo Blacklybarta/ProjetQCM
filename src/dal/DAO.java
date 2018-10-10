@@ -7,6 +7,8 @@ import bo.Epreuve;
 public interface DAO<T> {
 
 	public void insert(T data) throws DALException ;
+	
+	public int insertWithIdReturn(T data) throws DALException ;
 
 	public void update(T data) throws DALException ;
 

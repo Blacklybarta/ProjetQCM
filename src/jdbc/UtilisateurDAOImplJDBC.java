@@ -291,4 +291,10 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 		return null;
 	}
 
+	@Override
+	public int insertWithIdReturn(Utilisateur data) throws DALException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

@@ -130,4 +130,10 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 		return null;
 	}
 
+	@Override
+	public int insertWithIdReturn(Epreuve data) throws DALException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

@@ -201,4 +201,11 @@ public class ThemeDAOImplJDBC implements DAO<Theme>{
 		return null;
 	}
 
+
+	@Override
+	public int insertWithIdReturn(Theme data) throws DALException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
