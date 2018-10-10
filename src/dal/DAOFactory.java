@@ -1,9 +1,11 @@
 package dal;
 
 import bo.Epreuve;
+import bo.Test;
 import bo.Theme;
 import bo.Utilisateur;
 import jdbc.EpreuveDAOImplJDBC;
+import jdbc.TestDAOImplJDBC;
 import jdbc.ThemeDAOImplJDBC;
 import jdbc.UtilisateurDAOImplJDBC;
 
@@ -25,5 +27,11 @@ public class DAOFactory {
 		DAO<Theme> themeDAO = null;
 		themeDAO = (DAO<Theme>) new ThemeDAOImplJDBC();
 		return themeDAO;
+	}
+	
+	public static DAO<Test> getTestDAO(){
+		DAO<Test> testDAO = null;
+		testDAO = (DAO<Test>) new TestDAOImplJDBC();
+		return testDAO;
 	}
 }

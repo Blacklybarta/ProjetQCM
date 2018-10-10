@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bo.Epreuve;
+import bo.Test;
 import bo.Utilisateur;
 import dal.DALException;
 import dal.DAO;
@@ -58,45 +59,45 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 	
 	public List<Epreuve> selectCandidatEpreuve(int idUtilistaeur){
 		// TODO Auto-generated method stub
-				con = null;
-				pstmt = null;
-				ResultSet rs = null;
-				try {
-					con = DBConnection.getConnection();
-					pstmt = con.prepareStatement(SQL_SELECT_BY_CANDIDAT);
-					pstmt.setInt(1, idUtilistaeur);
+		con = null;
+		pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_SELECT_BY_CANDIDAT);
+			pstmt.setInt(1, idUtilistaeur);
 
-					rs = pstmt.executeQuery();
-					while (rs.next())
-					{
-						if (rs.next()) {
-							Epreuve epreuve = new Epreuve();
-							
-							epreuve.setIdEpreuve(rs.getInt("idepreuve"));
-							epreuve.setDateDebutValidite(rs.getDate("dateDebutValidite"));
-							epreuve.setDateFinValidite(rs.getDate("dateFinValidite"));
-							epreuve.setTempsEcoule(rs.getInt("tempsEcoule"));
-							epreuve.setEtat(rs.getString("etat"));
-							epreuve.setNoteObtenu(rs.getFloat("note_obtenu"));
-							epreuve.setNiveauObtenu(rs.getString("niveau_obtenu"));
-							
-							listeEpreuves.add(epreuve);
-						}
-					}
+			rs = pstmt.executeQuery();
+			while (rs.next())
+			{
+				Epreuve epreuve = new Epreuve();
+				Test test = new Test();
+				
+				epreuve.setIdEpreuve(rs.getInt("idepreuve"));
+				epreuve.setDateDebutValidite(rs.getDate("dateDebutValidite"));
+				epreuve.setDateFinValidite(rs.getDate("dateFinValidite"));
+				epreuve.setTempsEcoule(rs.getInt("tempsEcoule"));
+				epreuve.setEtat(rs.getString("etat"));
+				epreuve.setNoteObtenu(rs.getFloat("note_obtenu"));
+				epreuve.setNiveauObtenu(rs.getString("niveau_obtenu"));
+				epreuve.setTest(rs.getInt("idTest"));
+				
+				listeEpreuves.add(epreuve);
+			}
 
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					try {
-						if (pstmt != null) {
-							pstmt.close();
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					closeConnection();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
 				}
-				return listeEpreuves;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}
+		return listeEpreuves;
 	}
 
 	@Override

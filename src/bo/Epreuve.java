@@ -3,6 +3,9 @@ package bo;
 import java.util.Date;
 import java.util.List;
 
+import dal.DALException;
+import dal.DAOFactory;
+
 public class Epreuve {
 
 	private int idEpreuve;
@@ -12,7 +15,7 @@ public class Epreuve {
 	private String etat;
 	private float noteObtenu;
 	private String niveauObtenu;
-	private Test idTest;
+	private Test test;
 	private List<QuestionTirage> listeQuestions;
 
 	public Epreuve() {
@@ -75,12 +78,16 @@ public class Epreuve {
 		this.niveauObtenu = niveauObtenu;
 	}
 
-	public Test getIdTest() {
-		return idTest;
+	public Test getTest() {
+		return test;
 	}
 
-	public void setIdTest(Test idTest) {
-		this.idTest = idTest;
+	public void setTest(int idtest) {
+		try {
+			this.test = DAOFactory.getTestDAO().selectById(idtest);
+		} catch (DALException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public List<QuestionTirage> getListeQuestions() {
@@ -94,7 +101,7 @@ public class Epreuve {
 	@Override
 	public String toString() {
 		return "Epreuve [idEpreuve=" + idEpreuve + ", noteObtenu=" + noteObtenu + ", niveauObtenu=" + niveauObtenu
-				+ ", idTest=" + idTest + "]";
+				+ ", idTest=" + test + "]";
 	}
 
 }
