@@ -9,23 +9,22 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
-<title>Collaborateur - Gestion</title>
+<title>Gestion - Ajout d'un thème</title>
 </head>
 <body>
+
 	<div class="col-xs-12 col-sm-9">
-		<div class="contenu">
-			<br> <br> En tant que collaborateurs vous pouvez :<br>
-			<ul>
-				<li>Créer un test</li>
-				<li>Créer des questions</li>
-				<li>Voir l'historique de vos tests</li>
-			</ul>
+		<h4>Création d'un nouveau thème</h4>
+		<div class="contenuAccueil">
+			<form action="/ProjetQCM/collaborateur/addTheme" method="post">
+				<Label for="libelle">Nom du thème</Label> <input type="text"
+					name="libelle" value="" required><br>
+				<button type="submit">Créer le thème</button>
+			</form>
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-3">
-
-		<!-- Menu -->
-		<%@include file="../fragments/menu.jsp"%>
+		<button><a href="<%=request.getContextPath()%>/collaborateur/gestion.jsp">Retour</a></button>
 	</div>
 </body>
 </html>

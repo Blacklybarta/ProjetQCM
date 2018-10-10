@@ -32,6 +32,33 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>CreerTheme</servlet-name>
+    <servlet-class>servlet.theme.DoCreerTheme</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreerTheme</servlet-name>
+    <url-pattern>/collaborateur/addTheme</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ModifierTheme</servlet-name>
+    <servlet-class>servlet.theme.DoModifierTheme</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifierTheme</servlet-name>
+    <url-pattern>/collaborateur/updateTheme</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SupprimerTheme</servlet-name>
+    <servlet-class>servlet.theme.DoSupprimerTheme</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SupprimerTheme</servlet-name>
+    <url-pattern>/collaborateur/removeTheme</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>Deconnexion</servlet-name>
     <servlet-class>servlet.DoLogOut</servlet-class>
   </servlet>
