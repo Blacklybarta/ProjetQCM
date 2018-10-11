@@ -3,12 +3,14 @@ package dal;
 import bo.Epreuve;
 import bo.Proposition;
 import bo.Question;
+import bo.Section;
 import bo.Test;
 import bo.Theme;
 import bo.Utilisateur;
 import jdbc.EpreuveDAOImplJDBC;
 import jdbc.PropositionDAOImplJDBC;
 import jdbc.QuestionDAOImplJDBC;
+import jdbc.SectionDAOImplJDBC;
 import jdbc.TestDAOImplJDBC;
 import jdbc.ThemeDAOImplJDBC;
 import jdbc.UtilisateurDAOImplJDBC;
@@ -49,5 +51,11 @@ public class DAOFactory {
 		DAO<Proposition> propositionDAO = null;
 		propositionDAO = (DAO<Proposition>) new PropositionDAOImplJDBC();
 		return propositionDAO;
+	}
+	
+	public static DAO<Section> getSectionDAO(){
+		DAO<Section> sectionDAO = null;
+		sectionDAO = (DAO<Section>) new SectionDAOImplJDBC();
+		return sectionDAO;
 	}
 }

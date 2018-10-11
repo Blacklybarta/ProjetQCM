@@ -9,7 +9,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
-<title>Gestion - Supprimer une question</title>
+<title>Gestion - Créer un test</title>
 </head>
 <body>
 	<div class="col-xs-12 col-sm-9">
