@@ -1,30 +1,40 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
-<title>Gestion - Ajout d'un thème</title>
+	<%@include file="../../fragments/head.jsp"%>
+	<title>QCM - Ajout d'un thème</title>
 </head>
 <body>
+	<div class="container">
+	<!-- Header -->
+		<%@include file="../../fragments/header.jsp"%>
 
-	<div class="col-xs-12 col-sm-9">
-		<h4>Création d'un nouveau thème</h4>
-		<div class="contenuAccueil">
-			<form action="/ProjetQCM/collaborateur/addTheme" method="post">
-				<Label for="libelle">Nom du thème</Label> <input type="text"
-					name="libelle" value="" required><br>
-				<button type="submit">Créer le thème</button>
-			</form>
+		<div class="col-xs-12 col-sm-9">
+			<h2>Création d'un thème</h2>
+			<p>Rentrer le nom du thème que vous souhaitez créer.</p>
+			<div class="contenuAccueil">
+				<form action="/ProjetQCM/collaborateur/addTheme" method="post">
+					<div class="row">
+						<div class="col-12 col-sm-2">
+							<Label for="libelle">Nom du thème</Label>
+						</div>
+						<div class="col-12 col-sm-10">
+							<input type="text" name="libelle" value="" required>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-12">
+							<a href="<%=request.getContextPath()%>/collaborateur/gestion.jsp"><button class="btn btn-secondary" type="button">Annuler</button></a>
+							<button class="btn btn-primary" type="submit">Créer</button>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
-	</div>
-	<div class="col-xs-12 col-sm-3">
-		<button><a href="<%=request.getContextPath()%>/collaborateur/gestion.jsp">Retour</a></button>
+		<div class="col-xs-12 col-sm-3">
+		</div>
 	</div>
 </body>
 </html>
