@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="now" class="java.util.Date"/>
-
 <%@ page import="bo.Epreuve" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,7 +23,18 @@
 			<ul>
 			<c:forEach var="epreuve" items="${epreuves}">
 				<c:if test="${epreuve.dateFinValidite.time > now.time}">
-					<li>Nom : ${epreuve.test.libelle}, description : ${epreuve.test.description}, Date Fin : ${epreuve.dateFinValidite}</li>
+					<li>
+						<p>Nom : ${epreuve.test.libelle}, description : ${epreuve.test.description}, Date Fin : ${epreuve.dateFinValidite}</p>
+						<p>
+							<form action="epreuve" method="POST">
+
+							<input type="hidden" name="idEpreuve" value="${epreuve.idEpreuve}" />
+							
+							<button type="submit">Passer cette épreuve</button>
+
+							</form>
+						</p>
+					</li>
 				</c:if>
 			</c:forEach>
 			</ul>

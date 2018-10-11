@@ -10,6 +10,7 @@ import java.util.List;
 
 import bo.Epreuve;
 import bo.Question;
+import bo.Section;
 import dal.DALException;
 import dal.DAO;
 import dal.DBConnection;
@@ -129,6 +130,12 @@ public class QuestionDAOImplJDBC implements DAO<Question>{
 
 	@Override
 	public List<Epreuve> selectCandidatEpreuve(int id) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Section selectByIdTest(int idtest) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}

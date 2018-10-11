@@ -4,6 +4,7 @@
   <welcome-file-list>
     <welcome-file>accueil.html</welcome-file>
   </welcome-file-list>
+  
   <servlet>
     <servlet-name>Accueil</servlet-name>
     <jsp-file>/accueil.html</jsp-file>
@@ -12,6 +13,7 @@
     <servlet-name>Accueil</servlet-name>
     <url-pattern>/accueil</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>Connexion</servlet-name>
     <servlet-class>servlet.DoValiderAcces</servlet-class>
@@ -20,6 +22,7 @@
     <servlet-name>Connexion</servlet-name>
     <url-pattern>/connexion</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>ValiderAcces</servlet-name>
     <servlet-class>servlet.DoValiderAcces</servlet-class>
@@ -28,6 +31,7 @@
     <servlet-name>ValiderAcces</servlet-name>
     <url-pattern>/validerAcces</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>CreerTheme</servlet-name>
     <servlet-class>servlet.theme.DoCreerTheme</servlet-class>
@@ -36,6 +40,7 @@
     <servlet-name>CreerTheme</servlet-name>
     <url-pattern>/collaborateur/addTheme</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>ModifierTheme</servlet-name>
     <servlet-class>servlet.theme.DoModifierTheme</servlet-class>
@@ -44,6 +49,7 @@
     <servlet-name>ModifierTheme</servlet-name>
     <url-pattern>/collaborateur/updateTheme</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>SupprimerTheme</servlet-name>
     <servlet-class>servlet.theme.DoSupprimerTheme</servlet-class>
@@ -88,4 +94,25 @@
     <servlet-name>Deconnexion</servlet-name>
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
+  
+  <!-- Condidat Servlets -->
+  
+  <servlet>
+    <servlet-name>EpreuveConfirm</servlet-name>
+    <servlet-class>servlet.DoStartEpreuve</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EpreuveConfirm</servlet-name>
+    <url-pattern>/epreuve</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Question</servlet-name>
+    <servlet-class>servlet.DoShowQuestion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Question</servlet-name>
+    <url-pattern>/epreuve/question/*</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bo.Epreuve;
+import bo.Section;
 import bo.Utilisateur;
 import dal.DALException;
 import dal.DAO;
@@ -295,6 +296,12 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 	public int insertWithIdReturn(Utilisateur data) throws DALException {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Section selectByIdTest(int idtest) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

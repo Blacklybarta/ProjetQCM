@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bo.Epreuve;
+import bo.Section;
 import bo.Test;
 import bo.Utilisateur;
 import dal.DALException;
@@ -23,6 +24,7 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 	private List<Epreuve> listeEpreuves = new ArrayList<>();
 	
 	private static final String SQL_SELECT_BY_CANDIDAT = "SELECT * FROM EPREUVE WHERE idUtilisateur=?";
+	private static final String SQL_SELECT_BY_ID = "SELECT * FROM EPREUVE WHERE idEpreuve=?";
 	
 	public void closeConnection() {
 		if (con != null) {
@@ -53,8 +55,44 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 
 	@Override
 	public Epreuve selectById(int id) throws DALException {
-		// TODO Auto-generated method stub
-		return null;
+		con = null;
+		pstmt = null;
+		ResultSet rs = null;
+		Epreuve epreuve = new Epreuve();
+		
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_SELECT_BY_ID);
+			pstmt.setInt(1, id);
+
+			rs = pstmt.executeQuery();
+			if (rs.next())
+			{
+				Test test = new Test();
+				
+				epreuve.setIdEpreuve(rs.getInt("idepreuve"));
+				epreuve.setDateDebutValidite(rs.getDate("dateDebutValidite"));
+				epreuve.setDateFinValidite(rs.getDate("dateFinValidite"));
+				epreuve.setTempsEcoule(rs.getInt("tempsEcoule"));
+				epreuve.setEtat(rs.getString("etat"));
+				epreuve.setNoteObtenu(rs.getFloat("note_obtenu"));
+				epreuve.setNiveauObtenu(rs.getString("niveau_obtenu"));
+				epreuve.setTest(rs.getInt("idTest"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}
+		return epreuve;
 	}
 	
 	public List<Epreuve> selectCandidatEpreuve(int idUtilistaeur){
@@ -134,6 +172,12 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 	public int insertWithIdReturn(Epreuve data) throws DALException {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Section selectByIdTest(int idtest) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

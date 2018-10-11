@@ -1,5 +1,8 @@
 package bo;
 
+import dal.DALException;
+import dal.DAOFactory;
+
 public class Section {
 
 	private int nbQuestionATirer;
@@ -22,16 +25,24 @@ public class Section {
 		return test;
 	}
 
-	public void setTest(Test test) {
-		this.test = test;
+	public void setTest(int idTest) {
+		try {
+			this.test = DAOFactory.getTestDAO().selectById(idTest);
+		} catch (DALException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Theme getTheme() {
 		return theme;
 	}
 
-	public void setTheme(Theme theme) {
-		this.theme = theme;
+	public void setTheme(int idTheme) {
+		try {
+			this.theme = DAOFactory.getThemeDAO().selectById(idTheme);
+		} catch (DALException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
