@@ -9,61 +9,49 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bo.Epreuve;
-import bo.Question;
+import bo.Promotion;
 import bo.Section;
 import bo.Theme;
 import dal.DALException;
 import dal.DAO;
 import dal.DBConnection;
 
-public class QuestionDAOImplJDBC implements DAO<Question>{
+public class PromotionDAOImplJDBC implements DAO<Promotion> {
 
 	private Connection con;
 	private PreparedStatement pstmt;
 	private Statement stmt;
-	private List<Question> listeQuestions = new ArrayList<>();
-	
-	private static final String SQL_INSERT = "INSERT INTO QUESTION(enonce,points,idtheme)VALUES(?,?,?)";
-	private static final String SQL_SELECTALL = "SELECT * FROM QUESTION ";
-	
+	private List<Promotion> listePromotions = new ArrayList<>();
+
+	private static final String SQL_INSERT = "INSERT INTO PROMOTION(libelle)VALUES(?)";
+	private static final String SQL_SELECTALL = "SELECT * FROM PROMOTION";
+
 	public void closeConnection() {
 		if (con != null) {
 			try {
 				con.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			con = null;
 		}
 	}
-	
+
 	@Override
-	public void insert(Question data) throws DALException {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public int insertWithIdReturn(Question data) throws DALException {
+	public void insert(Promotion data) throws DALException {
 		con = null;
 		pstmt = null;
 		try {
 			con = DBConnection.getConnection();
 			pstmt = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
-			
-			pstmt.setString(1, data.getEnonce());
-			//pstmt.setBytes(2, data.getImage());
-			pstmt.setInt(2, data.getPoints());
-			pstmt.setInt(3, data.getTheme().getIdTheme());
-			
-			
+
+			pstmt.setString(1, data.getLibelle());
 
 			int nbRows = pstmt.executeUpdate();
 			if (nbRows == 1) {
 				ResultSet rs = pstmt.getGeneratedKeys();
 				if (rs.next()) {
-					data.setIdQuestion(rs.getInt(1));
+					data.setCodePromo(rs.getInt(1));
 				}
 			}
 		} catch (SQLException e) {
@@ -79,84 +67,82 @@ public class QuestionDAOImplJDBC implements DAO<Question>{
 			}
 			closeConnection();
 		}
-		return data.getIdQuestion();
 	}
 
 	@Override
-	public void update(Question data) throws DALException {
+	public int insertWithIdReturn(Promotion data) throws DALException {
 		// TODO Auto-generated method stub
-		
+		return 0;
+	}
+
+	@Override
+	public void update(Promotion data) throws DALException {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void delete(int id) throws DALException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public Question selectById(int id) throws DALException {
+	public Promotion selectById(int id) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Question selectByIdentifiant(String identifiant, String mdp) throws DALException {
+	public Promotion selectByIdentifiant(String identifiant, String mdp) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Question> selectAll() throws DALException {
+	public List<Promotion> selectAll() throws DALException {
 		try {
 			con = DBConnection.getConnection();
 			stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(SQL_SELECTALL);
 
-			Question question = null;
-			listeQuestions.clear();
+			Promotion promotion = null;
+			listePromotions.clear();
 			while (rs.next()) {
-				question = new Question();
-				question.setIdQuestion(rs.getInt("idquestion"));
-				question.setEnonce(rs.getString("enonce"));
-				question.setPoints(rs.getInt("points"));
-				Theme theme = new Theme();
-				theme.setIdTheme(rs.getInt("idTheme"));
-				question.setTheme(theme);
-				listeQuestions.add(question);
+				promotion = new Promotion();
+				promotion.setCodePromo(rs.getInt("codepromo"));
+				promotion.setLibelle(rs.getString("libelle"));
+				listePromotions.add(promotion);
 			}
 		} catch (SQLException e) {
 			throw new DALException("selectAll failed - ", e);
 		} finally {
 			try {
-
 				if (stmt != null) {
 					stmt.close();
 				}
-
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			closeConnection();
 		}
-		return listeQuestions;
+		return listePromotions;
 	}
 
 	@Override
-	public List<Question> selectByKeyWord(String recherche) throws DALException {
+	public List<Promotion> selectByKeyWord(String recherche) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Question selectByUtilisateur(int id) throws DALException {
+	public Promotion selectByUtilisateur(int id) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Question> selectAllById(int id) throws DALException {
+	public List<Promotion> selectAllById(int id) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -172,7 +158,5 @@ public class QuestionDAOImplJDBC implements DAO<Question>{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
 
 }

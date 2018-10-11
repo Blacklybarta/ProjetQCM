@@ -1,6 +1,7 @@
 package dal;
 
 import bo.Epreuve;
+import bo.Promotion;
 import bo.Proposition;
 import bo.Question;
 import bo.Section;
@@ -8,6 +9,7 @@ import bo.Test;
 import bo.Theme;
 import bo.Utilisateur;
 import jdbc.EpreuveDAOImplJDBC;
+import jdbc.PromotionDAOImplJDBC;
 import jdbc.PropositionDAOImplJDBC;
 import jdbc.QuestionDAOImplJDBC;
 import jdbc.SectionDAOImplJDBC;
@@ -57,5 +59,11 @@ public class DAOFactory {
 		DAO<Section> sectionDAO = null;
 		sectionDAO = (DAO<Section>) new SectionDAOImplJDBC();
 		return sectionDAO;
+	}
+	
+	public static DAO<Promotion> getPromotionDAO(){
+		DAO<Promotion> promotionDAO = null;
+		promotionDAO = (DAO<Promotion>) new PromotionDAOImplJDBC();
+		return promotionDAO;
 	}
 }

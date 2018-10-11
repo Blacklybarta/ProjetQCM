@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bo.Epreuve;
+import bo.Question;
+import bo.Theme;
 import bo.Utilisateur;
 import dal.DALException;
 import dal.DAOFactory;
@@ -25,7 +27,13 @@ public class DoValiderAcces extends HttpServlet {
 			try {
 				utilisateur = DAOFactory.getUtilisateurDAO().selectById((int) session.getAttribute("idUtilisateur"));
 				if (utilisateur != null) {
-					if (utilisateur.isCollaborateur()) {					
+					if (utilisateur.isCollaborateur()) {	
+						List<Question> listeQuestion = DAOFactory.getQuestionDAO().selectAll();
+						List<Utilisateur> listeUtilisateurs = DAOFactory.getUtilisateurDAO().selectAll();
+						List<Theme> listeThemes = DAOFactory.getThemeDAO().selectAll();
+						req.setAttribute("listeThemes", listeThemes);
+						req.setAttribute("listeUtilisateurs", listeUtilisateurs);
+						req.setAttribute("listeQuestions", listeQuestion);
 						req.setAttribute("utilisateur", utilisateur);
 						this.getServletContext().getRequestDispatcher("/collaborateur/gestion.jsp").forward(req, resp);
 					} else if (utilisateur.isCandidat()) {

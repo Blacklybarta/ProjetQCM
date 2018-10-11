@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bo.Promotion;
+import dal.DALException;
+import dal.DAOFactory;
+
 public class DoCreerPromotion extends HttpServlet{
 
 	@Override
@@ -23,8 +27,15 @@ public class DoCreerPromotion extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		try {
+			Promotion promotion = new Promotion();
+			promotion.setLibelle(req.getParameter("nom"));
+			DAOFactory.getPromotionDAO().insert(promotion);
+			this.getServletContext().getRequestDispatcher("/collaborateur/gestion.jsp").forward(req, resp);
+		} catch (DALException e) {
+			e.printStackTrace();
+		}
+				
 	}
 
 }

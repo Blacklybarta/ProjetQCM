@@ -24,8 +24,8 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 
 	private static final String SQL_SELECT_BY_IDENTIFIANT = "SELECT * FROM UTILISATEUR WHERE email=? and password=?";
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM UTILISATEUR WHERE idUtilisateur=?";
-	private static final String SQL_INSERT = "INSERT INTO UTILISATEUR(identifiant,mdp,nom,prenom,administrateur,conducteur) VALUES(?,?,?,?,?,?)";
-	private static final String SQL_SELECTALL = "SELECT * FROM UTILISATEUR";
+	private static final String SQL_INSERT = "INSERT INTO UTILISATEUR(nom,prenom,email,password,isCandidat,isCollaborateur,codeProfil,codepromo) VALUES(?,?,?,?,?,?,?,?)";
+	private static final String SQL_SELECTALL = "SELECT * FROM UTILISATEUR ORDER BY nom ASC;";
 	private static final String SQL_DELETE = "UPDATE UTILISATEUR SET administrateur=?,conducteur=? WHERE idUtilisateur=?";
 	private static final String SQL_UPDATE = "UPDATE UTILISATEUR SET identifiant=?,mdp=?,nom=?,prenom=?,administrateur=?,conducteur=? WHERE idUtilisateur=?";
 
@@ -43,18 +43,19 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 
 	@Override
 	public void insert(Utilisateur data) throws DALException {
-		// TODO Auto-generated method stub
 		con = null;
 		pstmt = null;
 		try {
 			con = DBConnection.getConnection();
-			pstmt = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
-			pstmt.setInt(1, data.getIdUtilistaeur());
-			pstmt.setString(2, data.getPassword());
-			pstmt.setString(3, data.getNom());
-			pstmt.setString(4, data.getPrenom());
-			pstmt.setBoolean(5, data.isCollaborateur());
-			pstmt.setBoolean(6, data.isCandidat());
+			pstmt = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);	
+			pstmt.setString(1, data.getNom());
+			pstmt.setString(2, data.getPrenom());
+			pstmt.setString(3, data.getEmail());
+			pstmt.setString(4, data.getPassword());
+			pstmt.setBoolean(5, data.isCandidat());
+			pstmt.setBoolean(6, data.isCollaborateur());
+			pstmt.setInt(7, data.getCodeProfil());
+			pstmt.setInt(8, data.getCodePromo());
 
 			int nbRows = pstmt.executeUpdate();
 			if (nbRows == 1) {
@@ -232,24 +233,18 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 
 			Utilisateur utilisateur = null;
 			listUtilisateurs.clear();
-//			while (rs.next()) {
-//				utilisateur = new Utilisateur();
-//				utilisateur.setId(rs.getInt("idUtilisateur"));
-//				utilisateur.setIdentifiant(rs.getString("identifiant"));
-//				
-//				try {
-//					utilisateur.setMdp(rs.getString("mdp"));
-//					utilisateur.setNom(rs.getString("nom"));
-//					utilisateur.setPrenom(rs.getString("prenom"));
-//				} catch (ParameterNullException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
-//				utilisateur.setConducteur(rs.getBoolean("conducteur"));
-//				
-//				listUtilisateurs.add(utilisateur);
-//			}
+			while (rs.next()) {
+				utilisateur = new Utilisateur();
+				utilisateur.setIdUtilistaeur(rs.getInt("idutilisateur"));
+				utilisateur.setEmail(rs.getString("email"));
+				utilisateur.setPassword(rs.getString("password"));
+				utilisateur.setNom(rs.getString("nom"));
+				utilisateur.setPrenom(rs.getString("prenom"));
+				utilisateur.setCollaborateur(rs.getBoolean("isCollaborateur"));
+				utilisateur.setCandidat(rs.getBoolean("isCandidat"));				
+				
+				listUtilisateurs.add(utilisateur);
+			}
 		} catch (SQLException e) {
 			throw new DALException("selectAll failed - ", e);
 		} finally {
@@ -260,7 +255,6 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 				}
 
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			closeConnection();

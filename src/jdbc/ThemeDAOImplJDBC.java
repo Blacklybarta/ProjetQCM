@@ -23,7 +23,7 @@ public class ThemeDAOImplJDBC implements DAO<Theme>{
 	private List<Theme> listeThemes = new ArrayList<>();
 	
 	private static final String SQL_INSERT = "INSERT INTO THEME(libelle)VALUES(?)";
-	private static final String SQL_SELECTALL = "SELECT * FROM THEME";
+	private static final String SQL_SELECTALL = "SELECT * FROM THEME ORDER BY libelle";
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM THEME WHERE idTheme=?";
 	private static final String SQL_UPDATE = "UPDATE THEME SET libelle=? WHERE idtheme=?";
 	
