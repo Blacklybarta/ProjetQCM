@@ -14,7 +14,7 @@
 <body>
 	<div class="col-xs-12 col-sm-9">
 		<div class="contenu">
-		Pas géré
+		<h1>Page en construction</h1>
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-3">

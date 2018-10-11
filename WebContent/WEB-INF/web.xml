@@ -149,6 +149,60 @@
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>CreerCandidat</servlet-name>
+    <servlet-class>servlet.utilisateur.DoCreerUtilisateur</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreerCandidat</servlet-name>
+    <url-pattern>/collaborateur/addCandidat</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ModifierCandidat</servlet-name>
+    <servlet-class>servlet.utilisateur.DoModifierUtilisateur</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifierCandidat</servlet-name>
+    <url-pattern>/collaborateur/updateCandidat</url-pattern>
+  </servlet-mapping>
+
+<servlet>
+    <servlet-name>SupprimerCandidat</servlet-name>
+    <servlet-class>servlet.utilisateur.DoSupprimerUtilisateur</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SupprimerCandidat</servlet-name>
+    <url-pattern>/collaborateur/removeCandidat</url-pattern>
+  </servlet-mapping>	
+  
+  <servlet>
+    <servlet-name>CreerPromotion</servlet-name>
+    <servlet-class>servlet.promotion.DoCreerPromotion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreerPromotion</servlet-name>
+    <url-pattern>/collaborateur/addPromotion</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ModifierPromotion</servlet-name>
+    <servlet-class>servlet.promotion.DoModifierPromotion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifierPromotion</servlet-name>
+    <url-pattern>/collaborateur/updatePromotion</url-pattern>
+  </servlet-mapping>
+
+<servlet>
+    <servlet-name>SupprimerPromotion</servlet-name>
+    <servlet-class>servlet.promotion.DoSupprimerPromotion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SupprimerPromotion</servlet-name>
+    <url-pattern>/collaborateur/removePromotion</url-pattern>
+  </servlet-mapping>
+  
   <!-- Condidat Servlets -->
   
   <servlet>

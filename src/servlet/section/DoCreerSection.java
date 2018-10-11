@@ -57,7 +57,5 @@ public class DoCreerSection extends HttpServlet {
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
-
 	}
-
 }
