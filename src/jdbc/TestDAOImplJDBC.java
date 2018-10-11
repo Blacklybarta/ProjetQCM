@@ -11,18 +11,23 @@ import java.util.List;
 import bo.Epreuve;
 import bo.Section;
 import bo.Test;
+import bo.Theme;
 import bo.Utilisateur;
 import dal.DALException;
 import dal.DAO;
 import dal.DBConnection;
 
-public class TestDAOImplJDBC implements DAO<Test>{
-	
+
+public class TestDAOImplJDBC implements DAO<Test> {
+
 	private Connection con;
 	private PreparedStatement pstmt;
 	private Statement stmt;
-	
+	private List<Test> listeTests = new ArrayList<>();
+
+	private static final String SQL_INSERT = "INSERT INTO TEST(libelle,description,duree,seuil_haut,seuil_bas)VALUES(?,?,?,?,?)";
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM TEST WHERE idtest=?";
+	private static final String SQL_SELECTALL = "SELECT * FROM TEST";
 
 	public void closeConnection() {
 		if (con != null) {
@@ -35,23 +40,52 @@ public class TestDAOImplJDBC implements DAO<Test>{
 			con = null;
 		}
 	}
-	
+
 	@Override
 	public void insert(Test data) throws DALException {
-		// TODO Auto-generated method stub
-		
+		con = null;
+		pstmt = null;
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
+
+			pstmt.setString(1, data.getLibelle());
+			pstmt.setString(2, data.getDescription());
+			pstmt.setInt(3, data.getDuree());
+			pstmt.setInt(4, data.getSeuilHaut());
+			pstmt.setInt(5, data.getSeuilBas());
+
+			int nbRows = pstmt.executeUpdate();
+			if (nbRows == 1) {
+				ResultSet rs = pstmt.getGeneratedKeys();
+				if (rs.next()) {
+					data.setIdTest(rs.getInt(1));
+				}
+			}
+		} catch (SQLException e) {
+			throw new DALException("Insert theme failed - " + data, e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				throw new DALException("close failed - ", e);
+			}
+			closeConnection();
+		}
 	}
 
 	@Override
 	public void update(Test data) throws DALException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(int id) throws DALException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -60,7 +94,7 @@ public class TestDAOImplJDBC implements DAO<Test>{
 		pstmt = null;
 		ResultSet rs = null;
 		Test test = null;
-		
+
 		try {
 			con = DBConnection.getConnection();
 			pstmt = con.prepareStatement(SQL_SELECT_BY_ID);
@@ -100,8 +134,39 @@ public class TestDAOImplJDBC implements DAO<Test>{
 
 	@Override
 	public List<Test> selectAll() throws DALException {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			con = DBConnection.getConnection();
+			stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(SQL_SELECTALL);
+
+			Test test = null;
+			listeTests.clear();
+			while (rs.next()) {
+				test = new Test();
+				test.setIdTest(rs.getInt("idtest"));
+				test.setLibelle(rs.getString("libelle"));
+				test.setDescription(rs.getString("description"));
+				test.setDuree(rs.getInt("duree"));
+				test.setSeuilHaut(rs.getInt("seuil_haut"));
+				test.setSeuilBas(rs.getInt("seuil_bas"));
+				listeTests.add(test);
+			}
+		} catch (SQLException e) {
+			throw new DALException("selectAll failed - ", e);
+		} finally {
+			try {
+
+				if (stmt != null) {
+					stmt.close();
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			closeConnection();
+		}
+		return listeTests;
 	}
 
 	@Override
@@ -133,6 +198,7 @@ public class TestDAOImplJDBC implements DAO<Test>{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 	@Override
 	public Section selectByIdTest(int idtest) throws DALException {

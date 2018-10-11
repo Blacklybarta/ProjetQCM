@@ -2,12 +2,12 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>ProjetQCM</display-name>
   <welcome-file-list>
-    <welcome-file>accueil.html</welcome-file>
+    <welcome-file>accueil.jsp</welcome-file>
   </welcome-file-list>
   
   <servlet>
     <servlet-name>Accueil</servlet-name>
-    <jsp-file>/accueil.html</jsp-file>
+    <jsp-file>/accueil.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>Accueil</servlet-name>
@@ -84,6 +84,60 @@
   <servlet-mapping>
     <servlet-name>SupprimerQuestion</servlet-name>
     <url-pattern>/collaborateur/removeQuestion</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>CreerTest</servlet-name>
+    <servlet-class>servlet.test.DoCreerTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreerTest</servlet-name>
+    <url-pattern>/collaborateur/addTest</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ModifierTest</servlet-name>
+    <servlet-class>servlet.test.DoModifierTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifierTest</servlet-name>
+    <url-pattern>/collaborateur/updateTest</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SupprimerTest</servlet-name>
+    <servlet-class>servlet.test.DoSupprimerTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SupprimerTest</servlet-name>
+    <url-pattern>/collaborateur/removeTest</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>CreerSection</servlet-name>
+    <servlet-class>servlet.section.DoCreerSection</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreerSection</servlet-name>
+    <url-pattern>/collaborateur/addSection</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>ModifierSection</servlet-name>
+    <servlet-class>servlet.section.DoModifierSection</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifierSection</servlet-name>
+    <url-pattern>/collaborateur/updateSection</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SupprimerSection</servlet-name>
+    <servlet-class>servlet.section.DoSupprimerSection</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SupprimerSection</servlet-name>
+    <url-pattern>/collaborateur/removeSection</url-pattern>
   </servlet-mapping>
   
   <servlet>

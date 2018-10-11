@@ -23,14 +23,15 @@ public class SectionDAOImplJDBC implements DAO<Section> {
 	private Statement stmt;
 	private List<Section> listeSections = new ArrayList<>();
 	
+
 	private static final String SQL_SELECT_BY_ID_TEST = "SELECT * FROM TEST WHERE idtest=?";
-	
+	private static final String SQL_INSERT = "INSERT INTO SECTION_TEST(nbquestionsatirer,idtest,idtheme)VALUES(?,?,?)";	
+
 	public void closeConnection() {
 		if (con != null) {
 			try {
 				con.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			con = null;
@@ -39,8 +40,36 @@ public class SectionDAOImplJDBC implements DAO<Section> {
 	
 	@Override
 	public void insert(Section data) throws DALException {
-		// TODO Auto-generated method stub
-		
+		con = null;
+		pstmt = null;
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
+
+			pstmt.setInt(1, data.getNbQuestionATirer());
+			pstmt.setInt(2, data.getTest().getIdTest());
+			pstmt.setInt(3, data.getTheme().getIdTheme());
+
+			pstmt.executeUpdate();
+//			int nbRows = pstmt.executeUpdate();
+//			if (nbRows == 1) {
+//				ResultSet rs = pstmt.getGeneratedKeys();
+//				if (rs.next()) {
+//					data.setIdTest(rs.getInt(1));
+//				}
+//			}
+		} catch (SQLException e) {
+			throw new DALException("Insert theme failed - " + data, e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				throw new DALException("close failed - ", e);
+			}
+			closeConnection();
+		}
 	}
 
 	@Override

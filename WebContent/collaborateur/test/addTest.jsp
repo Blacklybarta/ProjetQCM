@@ -13,7 +13,27 @@
 </head>
 <body>
 	<div class="col-xs-12 col-sm-9">
-		<h1>Page en construction</h1>
+		<h4>Création d'un nouveau test</h4>
+		<div class="contenuAccueil">
+			<form action="/ProjetQCM/collaborateur/addTest" method="post">
+				<Label for="libelle">Nom du test</Label> 
+				<input type="text" name="libelle" value="" required><br>
+				
+				<Label for="description">Description</Label> 
+				<textarea name="description" cols="30" rows="4" placeholder="Description du test" required></textarea><br>
+				
+				<Label for="duree">Durée du test en minutes</Label> 
+				<input type="number" name="duree" step="10" min="30" value="30" required><br>
+				
+				<Label for="seuilHaut">Seuil haut du test (en %)</Label> 
+				<input type="number" name="seuilHaut" step="1" min="0" value="1" max="100"  required><br>
+				
+				<Label for="seuilBas">Seuil bas du test (en %)</Label> 
+				<input type="number" name="seuilBas" step="1" min="0" value="1" max="100"  required><br>
+				
+				<button type="submit">Créer le test</button>
+			</form>
+		</div>
 	</div>
 	<div class="col-xs-12 col-sm-3">
 		<button>
