@@ -2,16 +2,6 @@ header {
 	background-color: grey;
 }
 
-#menu {
-	background-color: #5bb8ff;
-	text-align: center;
-	border-radius: 10px;
-}
-
-#menu a {
-	color: white;
-}
-
 #logo, #titre {
 	display: inline-block;
 }

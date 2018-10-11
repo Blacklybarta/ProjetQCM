@@ -15,6 +15,9 @@
 	<div class="container">
 		<!-- Header -->
 		<%@include file="../fragments/header.jsp"%>
+		
+		<!-- Menu -->
+		<%@include file="../fragments/menu.jsp"%>
 
 		<div class="col-xs-12 col-sm-9">
 			<h2>Accueil collaborateur</h2>
@@ -65,11 +68,8 @@
 				<div class="col-12 col-sm-6"></div>
 			</div>
 		</div>
-
-		<div class="col-xs-12 col-sm-3">
-			<!-- Menu -->
-			<%@include file="../fragments/menu.jsp"%>
-		</div>
 	</div>
+	
+	<%@include file="../fragments/script.jsp"%>
 </body>
 </html>

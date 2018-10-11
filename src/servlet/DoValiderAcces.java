@@ -46,7 +46,7 @@ public class DoValiderAcces extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else {
-			resp.sendRedirect("/ProjetQCM/connexion.html");
+			resp.sendRedirect("/ProjetQCM/connexion.jsp");
 		}
 	}
 	

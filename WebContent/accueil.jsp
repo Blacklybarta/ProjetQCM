@@ -15,5 +15,7 @@
 		<p>Veuillez vous connecter pour passer ou administrer une épreuve.</p>
 		<a href="/ProjetQCM/connexion"><button class="btn btn-primary" type="button">Se connecter</button></a>
 	</div>
+	
+	<%@include file="../fragments/script.jsp"%>
 </body>
 </html>

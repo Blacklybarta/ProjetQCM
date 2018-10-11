@@ -7,34 +7,39 @@
 </head>
 <body>
 	<div class="container">
-	<!-- Header -->
+		<!-- Header -->
 		<%@include file="../../fragments/header.jsp"%>
+		
+		<!-- Menu -->
+		<%@include file="../../fragments/menu.jsp"%>
 
-		<div class="col-xs-12 col-sm-9">
-			<h2>Création d'un thème</h2>
-			<p>Rentrer le nom du thème que vous souhaitez créer.</p>
-			<div class="contenuAccueil">
-				<form action="/ProjetQCM/collaborateur/addTheme" method="post">
-					<div class="row">
-						<div class="col-12 col-sm-2">
-							<Label for="libelle">Nom du thème</Label>
+		<div class="row">
+			<div class="col-12">
+				<h2>Création d'un thème</h2>
+				<p>Rentrer le nom du thème que vous souhaitez créer.</p>
+				<div class="contenuAccueil">
+					<form action="/ProjetQCM/collaborateur/addTheme" method="post">
+						<div class="row">
+							<div class="col-12 col-sm-2">
+								<Label for="libelle">Nom du thème</Label>
+							</div>
+							<div class="col-12 col-sm-10">
+								<input type="text" name="libelle" value="" required>
+							</div>
 						</div>
-						<div class="col-12 col-sm-10">
-							<input type="text" name="libelle" value="" required>
+						
+						<div class="row">
+							<div class="col-12">
+								<a href="<%=request.getContextPath()%>/collaborateur/gestion.jsp"><button class="btn btn-secondary" type="button">Annuler</button></a>
+								<button class="btn btn-primary" type="submit">Créer</button>
+							</div>
 						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-12">
-							<a href="<%=request.getContextPath()%>/collaborateur/gestion.jsp"><button class="btn btn-secondary" type="button">Annuler</button></a>
-							<button class="btn btn-primary" type="submit">Créer</button>
-						</div>
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-3">
-		</div>
 	</div>
+	
+	<%@include file="../../fragments/script.jsp"%>
 </body>
 </html>
