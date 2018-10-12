@@ -15,7 +15,7 @@
 	<div class="container">
 		<!-- Header -->
 		<%@include file="../fragments/header.jsp"%>
-		
+
 		<!-- Menu -->
 		<%@include file="../fragments/menu.jsp"%>
 
@@ -30,25 +30,17 @@
 				<div class="col-12 col-sm-6">
 					<Label>Liste des questions</Label> <select multiple
 						style="height: 300px; width: 100%;">
-						<%
-							for (Question u : listeQuestion) {
-						%>
-						<option><%=u.getEnonce()%></option>
-						<%
-							}
-						%>
+						<% for (Question u : listeQuestion) { %>
+							<option><%=u.getEnonce()%></option>
+						<% } %>
 					</select>
 				</div>
 				<div class="col-12 col-sm-6">
 					<Label>Liste des utilisateurs</Label> <select multiple
 						style="height: 300px; width: 100%;">
-						<%
-							for (Utilisateur u : listeUtilisateur) {
-						%>
-						<option><%=u.getPrenom() + " " + u.getNom()%></option>
-						<%
-							}
-						%>
+						<% for (Utilisateur u : listeUtilisateur) { %>
+							<option><%=u.getPrenom() + " " + u.getNom()%></option>
+						<% } %>
 					</select>
 				</div>
 			</div>
@@ -56,20 +48,16 @@
 				<div class="col-12 col-sm-6">
 					<Label>Liste des thèmes</Label> <select multiple
 						style="height: 300px; width: 100%;">
-						<%
-							for (Theme u : listeTheme) {
-						%>
-						<option><%=u.getLibelle()%></option>
-						<%
-							}
-						%>
+						<% for (Theme u : listeTheme) { %>
+							<option><%=u.getLibelle()%></option>
+						<% } %>
 					</select>
 				</div>
 				<div class="col-12 col-sm-6"></div>
 			</div>
 		</div>
 	</div>
-	
+
 	<%@include file="../fragments/script.jsp"%>
 </body>
 </html>
