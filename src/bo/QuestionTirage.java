@@ -1,5 +1,8 @@
 package bo;
 
+import dal.DALException;
+import dal.DAOFactory;
+
 public class QuestionTirage {
 
 	private boolean estMarquee;
@@ -34,6 +37,15 @@ public class QuestionTirage {
 	public void setEpreuve(Epreuve epreuve) {
 		this.epreuve = epreuve;
 	}
+	
+	public void setEpreuve(int idEpreuve) {
+		try {
+			this.epreuve = DAOFactory.getEpreuveDAO().selectById(idEpreuve);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public Question getQuestion() {
 		return question;
@@ -41,6 +53,15 @@ public class QuestionTirage {
 
 	public void setQuestion(Question question) {
 		this.question = question;
+	}
+	
+	public void setQuestion(int idQuestion) {
+		try {
+			this.question = DAOFactory.getQuestionDAO().selectById(idQuestion);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -58,16 +58,28 @@ public class DoStartEpreuve extends HttpServlet {
 			}
 			else if (epreuve.getEtat().equals(EN_COURS))
 			{
+				recupererQuestion(session, 1);
 				
+				this.getServletContext().getRequestDispatcher("/candidat/epreuve/question.jsp").forward(req, resp);
 			}
 		}
 		else if(isNumeric(questionNum))
 		{
-			int epreuveId = Integer.valueOf((String) session.getAttribute("currentEpreuveId"));
+			recupererQuestion(session, Integer.valueOf(questionNum));
 			
-			System.out.println(epreuveId);
-			
+			this.getServletContext().getRequestDispatcher("/candidat/epreuve/question.jsp").forward(req, resp);
 		}
+	}
+	
+	private void recupererQuestion(HttpSession session, int numQuestion)
+	{
+		int epreuveId = (Integer) session.getAttribute("currentEpreuveId");
+		System.out.println(epreuveId);
+		QuestionTirage question = null;
+		
+		question = DAOFactory.getQuestionTirageDAO().selectByIdEpreuve(epreuveId, numQuestion);
+
+		session.setAttribute("questionTirage", question);
 	}
 	
 	private void generateQuestions(Epreuve epreuve)

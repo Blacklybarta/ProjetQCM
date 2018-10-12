@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bo.Epreuve;
+import bo.Proposition;
 import bo.Question;
+import bo.QuestionTirage;
 import bo.Section;
 import bo.Theme;
 import bo.Test;
@@ -27,6 +29,7 @@ public class QuestionDAOImplJDBC implements DAO<Question>{
 	
 	private static final String SQL_INSERT = "INSERT INTO QUESTION(enonce,points,idtheme)VALUES(?,?,?)";
 	private static final String SQL_SELECTALL = "SELECT * FROM QUESTION ";
+	private static final String SQL_SELECT_BY_ID = "SELECT * FROM QUESTION WHERE idquestion=?";
 	private static final String SQL_SELECT_BY_THEME_RANDOM = "SELECT TOP # * FROM QUESTION WHERE idTheme=? ORDER BY NEWID()";
 	
 	public void closeConnection() {
@@ -99,8 +102,42 @@ public class QuestionDAOImplJDBC implements DAO<Question>{
 
 	@Override
 	public Question selectById(int id) throws DALException {
-		// TODO Auto-generated method stub
-		return null;
+		con = null;
+		pstmt = null;
+		ResultSet rs = null;
+		Question question = null;
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_SELECT_BY_ID);
+			pstmt.setInt(1, id);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				question = new Question();
+				question.setIdQuestion(rs.getInt("idquestion"));
+				question.setEnonce(rs.getString("enonce"));
+				question.setPoints(rs.getInt("points"));
+				Theme theme = new Theme();
+				theme.setIdTheme(rs.getInt("idTheme"));
+				question.setTheme(theme);
+				question.setListeProposition();
+				
+				listeQuestions.add(question);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}
+		return question;
 	}
 
 	@Override
@@ -214,6 +251,18 @@ public class QuestionDAOImplJDBC implements DAO<Question>{
 			closeConnection();
 		}
 		return questions;
+	}
+
+	@Override
+	public QuestionTirage selectByIdEpreuve(int idEpreuve, int nbQuestion) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Proposition> selectByIdQuestion(int idQuestion) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

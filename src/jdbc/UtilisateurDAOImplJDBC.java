@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bo.Epreuve;
+import bo.Proposition;
 import bo.Question;
+import bo.QuestionTirage;
 import bo.Section;
 import bo.Utilisateur;
 import dal.DALException;
@@ -302,6 +304,18 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 	@Override
 	public List<Question> selectRandomQuestions(int idTheme, int nbQuestions, List<Question> questions)
 			throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public QuestionTirage selectByIdEpreuve(int idEpreuve, int nbQuestion) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Proposition> selectByIdQuestion(int idQuestion) {
 		// TODO Auto-generated method stub
 		return null;
 	}

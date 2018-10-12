@@ -11,6 +11,7 @@ import java.util.List;
 import bo.Epreuve;
 import bo.Proposition;
 import bo.Question;
+import bo.QuestionTirage;
 import bo.Section;
 import dal.DALException;
 import dal.DAO;
@@ -24,6 +25,7 @@ public class PropositionDAOImplJDBC implements DAO<Proposition> {
 	private List<Proposition> listePropositions = new ArrayList<>();
 	
 	private static final String SQL_INSERT = "INSERT INTO PROPOSITION(enonce,estBonne,idquestion)VALUES(?,?,?)";
+	private static final String SQL_SELECT_BY_ID_QUESTION = "SELECT * FROM PROPOSITION WHERE idQuestion=?";
 	
 	public void closeConnection() {
 		if (con != null) {
@@ -143,7 +145,50 @@ public class PropositionDAOImplJDBC implements DAO<Proposition> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public QuestionTirage selectByIdEpreuve(int idEpreuve, int nbQuestion) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
-	
+	@Override
+	public List<Proposition> selectByIdQuestion(int idQuestion) {
+		con = null;
+		pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_SELECT_BY_ID_QUESTION);
+			pstmt.setInt(1, idQuestion);
+
+			rs = pstmt.executeQuery();
+			while (rs.next())
+			{
+				Proposition proposition = new Proposition();
+
+				proposition.setEstBonne(rs.getBoolean("estBonne"));
+				proposition.setIdProposition(rs.getInt("idproposition"));
+				proposition.setEnonce(rs.getString("enonce"));
+				//proposition.setQuestion(rs.getBoolean("estBonne"));
+				
+				listePropositions.add(proposition);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}
+		return listePropositions;
+	}
 
 }

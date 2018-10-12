@@ -76,6 +76,10 @@ public class Question {
 	public void setListeProposition(List<Proposition> listeProposition) {
 		this.listeProposition = listeProposition;
 	}
+	
+	public void setListeProposition() {
+		this.listeProposition = DAOFactory.getPropositionDAO().selectByIdQuestion(this.idQuestion);
+	}
 
 	@Override
 	public String toString() {

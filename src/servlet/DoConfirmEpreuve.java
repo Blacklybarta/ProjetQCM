@@ -36,7 +36,6 @@ public class DoConfirmEpreuve extends HttpServlet {
 			req.setAttribute("error", e.getMessage());
 			this.getServletContext().getRequestDispatcher("/erreur.jsp").forward(req, resp);
 		}
-		
 		this.getServletContext().getRequestDispatcher("/candidat/epreuve/epreuveconfirm.jsp").forward(req, resp);
 	}
 	
