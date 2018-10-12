@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bo.Epreuve;
+import bo.Question;
 import bo.Section;
 import bo.Utilisateur;
 import dal.DALException;
@@ -293,7 +294,14 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 	}
 
 	@Override
-	public Section selectByIdTest(int idtest) throws DALException {
+	public List<Section> selectByIdTest(int idtest) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Question> selectRandomQuestions(int idTheme, int nbQuestions, List<Question> questions)
+			throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}

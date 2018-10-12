@@ -207,7 +207,7 @@
   
   <servlet>
     <servlet-name>EpreuveConfirm</servlet-name>
-    <servlet-class>servlet.DoStartEpreuve</servlet-class>
+    <servlet-class>servlet.DoConfirmEpreuve</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>EpreuveConfirm</servlet-name>
@@ -216,7 +216,7 @@
   
   <servlet>
     <servlet-name>Question</servlet-name>
-    <servlet-class>servlet.DoShowQuestion</servlet-class>
+    <servlet-class>servlet.DoStartEpreuve</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Question</servlet-name>

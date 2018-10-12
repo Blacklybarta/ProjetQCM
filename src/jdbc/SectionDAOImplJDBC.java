@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bo.Epreuve;
+import bo.Question;
 import bo.Section;
-import bo.Test;
-import bo.Theme;
 import dal.DALException;
 import dal.DAO;
 import dal.DBConnection;
@@ -24,7 +23,7 @@ public class SectionDAOImplJDBC implements DAO<Section> {
 	private List<Section> listeSections = new ArrayList<>();
 	
 
-	private static final String SQL_SELECT_BY_ID_TEST = "SELECT * FROM TEST WHERE idtest=?";
+	private static final String SQL_SELECT_BY_ID_TEST = "SELECT * FROM SECTION_TEST WHERE idtest=?";
 	private static final String SQL_INSERT = "INSERT INTO SECTION_TEST(nbquestionsatirer,idtest,idtheme)VALUES(?,?,?)";	
 
 	public void closeConnection() {
@@ -133,11 +132,11 @@ public class SectionDAOImplJDBC implements DAO<Section> {
 	}
 	
 	@Override
-	public Section selectByIdTest(int idtest) throws DALException {
+	public List<Section> selectByIdTest(int idtest) throws DALException {
 		con = null;
 		pstmt = null;
 		ResultSet rs = null;
-		Section section = null;
+		List<Section> sections = new ArrayList();
 		
 		try {
 			con = DBConnection.getConnection();
@@ -145,12 +144,15 @@ public class SectionDAOImplJDBC implements DAO<Section> {
 			pstmt.setInt(1, idtest);
 
 			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				section = new Section();
+			while (rs.next())
+			{
+				Section section = new Section();
 				
 				section.setNbQuestionATirer(rs.getInt("nbquestionsatirer"));
 				section.setTest(rs.getInt("idtest"));
 				section.setTheme(rs.getInt("idtheme"));
+				
+				sections.add(section);
 			}
 
 		} catch (Exception e) {
@@ -165,6 +167,13 @@ public class SectionDAOImplJDBC implements DAO<Section> {
 			}
 			closeConnection();
 		}
-		return section;
+		return sections;
+	}
+
+	@Override
+	public List<Question> selectRandomQuestions(int idTheme, int nbQuestions, List<Question> questions)
+			throws DALException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

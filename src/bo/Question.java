@@ -2,6 +2,8 @@ package bo;
 
 import java.util.List;
 
+import dal.DALException;
+import dal.DAOFactory;
 import javafx.scene.image.Image;
 
 public class Question {
@@ -52,6 +54,15 @@ public class Question {
 
 	public Theme getTheme() {
 		return theme;
+	}
+
+	public void setTheme(int idTheme) {
+		try {
+			this.theme = DAOFactory.getThemeDAO().selectById((idTheme));
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void setTheme(Theme theme) {

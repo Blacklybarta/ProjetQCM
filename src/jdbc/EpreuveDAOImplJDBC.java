@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bo.Epreuve;
+import bo.Question;
 import bo.Section;
 import bo.Test;
 import bo.Utilisateur;
@@ -25,6 +26,7 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 	
 	private static final String SQL_SELECT_BY_CANDIDAT = "SELECT * FROM EPREUVE WHERE idUtilisateur=?";
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM EPREUVE WHERE idEpreuve=?";
+	private static final String SQL_UPDATE = "UPDATE EPREUVE SET etat=? WHERE idepreuve=?";
 	
 	public void closeConnection() {
 		if (con != null) {
@@ -45,7 +47,27 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 
 	@Override
 	public void update(Epreuve data) throws DALException {
-		// TODO Auto-generated method stub		
+		con = null;
+		pstmt = null;
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_UPDATE);
+			pstmt.setString(1, data.getEtat());			
+			pstmt.setInt(2, data.getIdEpreuve());
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new DALException("Update theme failed - " + data, e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}		
 	}
 
 	@Override
@@ -175,7 +197,14 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 	}
 
 	@Override
-	public Section selectByIdTest(int idtest) throws DALException {
+	public List<Section> selectByIdTest(int idtest) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Question> selectRandomQuestions(int idTheme, int nbQuestions, List<Question> questions)
+			throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}

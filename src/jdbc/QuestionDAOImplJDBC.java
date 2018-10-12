@@ -12,9 +12,11 @@ import bo.Epreuve;
 import bo.Question;
 import bo.Section;
 import bo.Theme;
+import bo.Test;
 import dal.DALException;
 import dal.DAO;
 import dal.DBConnection;
+import javafx.scene.image.Image;
 
 public class QuestionDAOImplJDBC implements DAO<Question>{
 
@@ -25,6 +27,7 @@ public class QuestionDAOImplJDBC implements DAO<Question>{
 	
 	private static final String SQL_INSERT = "INSERT INTO QUESTION(enonce,points,idtheme)VALUES(?,?,?)";
 	private static final String SQL_SELECTALL = "SELECT * FROM QUESTION ";
+	private static final String SQL_SELECT_BY_THEME_RANDOM = "SELECT TOP # * FROM QUESTION WHERE idTheme=? ORDER BY NEWID()";
 	
 	public void closeConnection() {
 		if (con != null) {
@@ -168,11 +171,49 @@ public class QuestionDAOImplJDBC implements DAO<Question>{
 	}
 
 	@Override
-	public Section selectByIdTest(int idtest) throws DALException {
+	public List<Section> selectByIdTest(int idtest) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	
+	@Override
+	public List<Question> selectRandomQuestions(int idTheme, int nbQuestions, List<Question> questions) throws DALException {
+		con = null;
+		pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBConnection.getConnection();
+			String prdStatmnt = SQL_SELECT_BY_THEME_RANDOM.replaceAll("#", String.valueOf(nbQuestions));
+			System.out.println(prdStatmnt);
+			pstmt = con.prepareStatement(prdStatmnt);
+			pstmt.setInt(1, idTheme);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next())
+			{
+				Question question = new Question();
+				
+				question.setEnonce(rs.getString("enonce"));
+				question.setIdQuestion(rs.getInt("idquestion"));
+				question.setPoints(rs.getInt("points"));
+				question.setTheme(rs.getInt("idTheme"));
+				
+				questions.add(question);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}
+		return questions;
+	}
 
 }

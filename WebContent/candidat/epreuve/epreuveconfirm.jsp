@@ -22,7 +22,7 @@
 			<p>Description : ${epreuve.test.description}</p>
 			<p>Durée : ${epreuve.test.duree} minutes</p>
 			
-			<form action="epreuve/question/*" method="POST">
+			<form action="epreuve/question/start" method="POST">
 
 				<input type="hidden" name="idEpreuve" value="${epreuve.idEpreuve}" />
 							

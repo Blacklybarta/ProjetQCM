@@ -4,6 +4,7 @@ import bo.Epreuve;
 import bo.Promotion;
 import bo.Proposition;
 import bo.Question;
+import bo.QuestionTirage;
 import bo.Section;
 import bo.Test;
 import bo.Theme;
@@ -12,6 +13,7 @@ import jdbc.EpreuveDAOImplJDBC;
 import jdbc.PromotionDAOImplJDBC;
 import jdbc.PropositionDAOImplJDBC;
 import jdbc.QuestionDAOImplJDBC;
+import jdbc.QuestionTirageDAOImplJDBC;
 import jdbc.SectionDAOImplJDBC;
 import jdbc.TestDAOImplJDBC;
 import jdbc.ThemeDAOImplJDBC;
@@ -65,5 +67,11 @@ public class DAOFactory {
 		DAO<Promotion> promotionDAO = null;
 		promotionDAO = (DAO<Promotion>) new PromotionDAOImplJDBC();
 		return promotionDAO;
+	}
+	
+	public static DAO<QuestionTirage> getQuestionTirageDAO(){
+		DAO<QuestionTirage> questionTirageDAO = null;
+		questionTirageDAO = (DAO<QuestionTirage>) new QuestionTirageDAOImplJDBC();
+		return questionTirageDAO;
 	}
 }

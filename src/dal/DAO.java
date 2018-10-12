@@ -3,6 +3,7 @@ package dal;
 import java.util.List;
 
 import bo.Epreuve;
+import bo.Question;
 import bo.Section;
 
 public interface DAO<T> {
@@ -29,6 +30,8 @@ public interface DAO<T> {
 	
 	public List<Epreuve> selectCandidatEpreuve(int id) throws DALException;
 
-	Section selectByIdTest(int idtest) throws DALException;
+	List<Section> selectByIdTest(int idtest) throws DALException;
+
+	List<Question> selectRandomQuestions(int idTheme, int nbQuestions, List<Question> questions) throws DALException;
 	
 }

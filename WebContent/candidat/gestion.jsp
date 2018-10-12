@@ -18,26 +18,62 @@
 		<!-- Menu -->
 		<%@include file="../fragments/menu.jsp"%>
 
-		<div class="row">
-			<div class="col-12">
-				<h2>Accueil candidat</h2>
-				En tant que candidats vous pouvez :
-				<ul>
-					<li>Tests</li>
-					<c:if test="${empty myObject.featuresList}">
-					<li>
-						<ul>
-							<c:forEach items="${epreuves}" var="epreuve">
-								<li>
-									${epreuve.test.libelle}
-								</li>
-							</c:forEach>
-						</ul>
-					</li>
-					</c:if>
-					<li>Voir l'historique de vos tests</li>
-				</ul>
-			</div>
+		<div class="col-xs-12 col-sm-9">
+			<h2>Accueil candidat</h2>
+			En tant que candidats vous pouvez :
+			<ul>
+				<li>Tests</li>
+				<c:if test="${empty myObject.featuresList}">
+					<c:forEach items="${epreuves}" var="epreuve">
+						<c:if test="${epreuve.etat == 'EA'}">
+							<li>
+								<ul>
+									<li>
+										<p>Nom : ${epreuve.test.libelle},</p>
+										<p>description : ${epreuve.test.description},</p>
+										<p>Date Fin : ${epreuve.dateFinValidite}</p>
+										
+										<form action="epreuve" method="POST">
+											<input type="hidden" name="idEpreuve" value="${epreuve.idEpreuve}" />
+											<button type="submit">Passer cette �preuve</button>
+										</form>
+									</li>
+								</ul>
+							</li>
+						</c:if>
+						<c:if test="${epreuve.etat == 'EC'}">
+							<li>
+								<ul>
+									<li>
+										<p>Nom : ${epreuve.test.libelle},</p>
+										<p>description : ${epreuve.test.description},</p>
+										<p>Date Fin : ${epreuve.dateFinValidite}</p>
+										
+										<form action="epreuve" method="POST">
+											<input type="hidden" name="idEpreuve" value="${epreuve.idEpreuve}" />
+											<button type="submit">Continuer cette �preuve</button>
+										</form>
+									</li>
+								</ul>
+							</li>
+						</c:if>
+					</c:forEach>
+				</c:if>
+				<li>Voir l'historique de vos tests</li>
+				<c:if test="${empty myObject.featuresList}">
+					<c:forEach items="${epreuves}" var="epreuve">
+						<c:if test="${epreuve.etat == 'T'}">
+							<li>
+								<ul>
+									<li>
+										${epreuve.test.libelle}
+									</li>
+								</ul>
+							</li>
+						</c:if>
+					</c:forEach>
+				</c:if>
+			</ul>
 		</div>
 	</div>
 	
