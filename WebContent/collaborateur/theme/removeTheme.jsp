@@ -20,7 +20,7 @@
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-3">
-				<a href="<%=request.getContextPath()%>/collaborateur/gestion.jsp"><button>Retour</button></a>
+				<a href="<%=request.getContextPath()%>/gestion.jsp"><button>Retour</button></a>
 			</div>
 		</div>
 	</div>
