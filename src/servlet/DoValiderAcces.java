@@ -42,7 +42,6 @@ public class DoValiderAcces extends HttpServlet {
 					}
 				}
 			} catch (DALException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
@@ -75,6 +74,12 @@ public class DoValiderAcces extends HttpServlet {
 					
 					this.getServletContext().getRequestDispatcher("/candidat/gestion.jsp").forward(req, resp);
 				} else if (utilisateur.isCollaborateur()) {
+					List<Question> listeQuestion = DAOFactory.getQuestionDAO().selectAll();
+					List<Utilisateur> listeUtilisateurs = DAOFactory.getUtilisateurDAO().selectAll();
+					List<Theme> listeThemes = DAOFactory.getThemeDAO().selectAll();
+					req.setAttribute("listeThemes", listeThemes);
+					req.setAttribute("listeUtilisateurs", listeUtilisateurs);
+					req.setAttribute("listeQuestions", listeQuestion);
 					req.setAttribute("utilisateur", utilisateur);
 					session.setAttribute("idUtilisateur", utilisateur.getIdUtilistaeur());
 					session.setAttribute("nomUtilisateur", utilisateur.getNom());

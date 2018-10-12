@@ -19,7 +19,7 @@
 		<!-- Menu -->
 		<%@include file="../fragments/menu.jsp"%>
 
-		<div class="col-xs-12 col-sm-9">
+		<div class="col-12">
 			<h2>Accueil collaborateur</h2>
 			<%
 				List<Question> listeQuestion = (ArrayList<Question>) request.getAttribute("listeQuestions");
