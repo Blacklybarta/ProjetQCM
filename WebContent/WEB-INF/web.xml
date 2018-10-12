@@ -24,6 +24,15 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>PageConnexion</servlet-name>
+    <jsp-file>/connexion.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PageConnexion</servlet-name>
+    <url-pattern>/pageConnexion</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>ValiderAcces</servlet-name>
     <servlet-class>servlet.DoValiderAcces</servlet-class>
   </servlet>
