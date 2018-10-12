@@ -10,6 +10,7 @@ import java.util.List;
 
 import bo.Epreuve;
 import bo.Promotion;
+import bo.Question;
 import bo.Section;
 import bo.Theme;
 import dal.DALException;
@@ -153,8 +154,17 @@ public class PromotionDAOImplJDBC implements DAO<Promotion> {
 		return null;
 	}
 
+	
+
 	@Override
-	public Section selectByIdTest(int idtest) throws DALException {
+	public List<Question> selectRandomQuestions(int idTheme, int nbQuestions, List<Question> questions)
+			throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Section> selectByIdTest(int idtest) throws DALException {
 		// TODO Auto-generated method stub
 		return null;
 	}
