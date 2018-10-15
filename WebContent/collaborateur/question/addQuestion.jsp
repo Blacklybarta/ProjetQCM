@@ -63,7 +63,7 @@
 	</div>
 	<div class="col-xs-12 col-sm-3">
 		<button>
-			<a href="<%=request.getContextPath()%>/collaborateur/gestion.jsp">Retour</a>
+			<a href="<%=request.getContextPath()%>/validerAcces">Retour</a>
 		</button>
 	</div>
 </body>

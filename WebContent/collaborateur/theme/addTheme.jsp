@@ -30,7 +30,7 @@
 						
 						<div class="row">
 							<div class="col-12">
-								<a href="<%=request.getContextPath()%>/collaborateur/gestion.jsp"><button class="btn btn-secondary" type="button">Annuler</button></a>
+								<a href="<%=request.getContextPath()%>/validerAcces"><button class="btn btn-secondary" type="button">Annuler</button></a>
 								<button class="btn btn-primary" type="submit">Créer</button>
 							</div>
 						</div>

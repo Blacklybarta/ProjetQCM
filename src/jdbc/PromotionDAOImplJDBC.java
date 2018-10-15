@@ -10,15 +10,10 @@ import java.util.List;
 
 import bo.Epreuve;
 import bo.Promotion;
-<<<<<<< HEAD
 import bo.Proposition;
 import bo.Question;
 import bo.QuestionTirage;
-=======
-import bo.Question;
->>>>>>> commit
 import bo.Section;
-import bo.Theme;
 import dal.DALException;
 import dal.DAO;
 import dal.DBConnection;
