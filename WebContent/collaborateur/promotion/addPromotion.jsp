@@ -37,5 +37,7 @@
 			</form>
 		</div>
 	</div>
+	
+	<%@include file="../../fragments/script.jsp"%>
 </body>
 </html>
