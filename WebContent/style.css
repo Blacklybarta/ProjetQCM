@@ -17,3 +17,16 @@ header, .card-header {
 #titre, .card-header {
 	color: white;
 }
+
+.selectAccueilCollaborateur {
+	height: 100%;
+	width: 100%;
+}
+
+.cardUtilisateurs {
+	height: 100%;
+}
+
+.cardQuestions, .cardThemes {
+	height: 300px;
+}
