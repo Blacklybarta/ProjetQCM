@@ -14,6 +14,7 @@ import bo.Proposition;
 import bo.Question;
 import bo.QuestionTirage;
 import bo.Section;
+import bo.Theme;
 import dal.DALException;
 import dal.DAO;
 import dal.DBConnection;
@@ -27,6 +28,8 @@ public class PromotionDAOImplJDBC implements DAO<Promotion> {
 
 	private static final String SQL_INSERT = "INSERT INTO PROMOTION(libelle)VALUES(?)";
 	private static final String SQL_SELECTALL = "SELECT * FROM PROMOTION";
+	private static final String SQL_SELECT_BY_ID = "SELECT * FROM PROMOTION WHERE codepromo=?";
+	private static final String SQL_UPDATE = "UPDATE PROMOTION SET libelle=? WHERE codepromo=?";
 
 	public void closeConnection() {
 		if (con != null) {
@@ -79,8 +82,27 @@ public class PromotionDAOImplJDBC implements DAO<Promotion> {
 
 	@Override
 	public void update(Promotion data) throws DALException {
-		// TODO Auto-generated method stub
+		con = null;
+		pstmt = null;
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_UPDATE);
+			pstmt.setString(1, data.getLibelle());			
+			pstmt.setInt(2, data.getCodePromo());
+			pstmt.executeUpdate();
 
+		} catch (SQLException e) {
+			throw new DALException("Update theme failed - " + data, e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}
 	}
 
 	@Override
@@ -91,8 +113,35 @@ public class PromotionDAOImplJDBC implements DAO<Promotion> {
 
 	@Override
 	public Promotion selectById(int id) throws DALException {
-		// TODO Auto-generated method stub
-		return null;
+		con = null;
+		pstmt = null;
+		ResultSet rs = null;
+		Promotion promotion= null;
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_SELECT_BY_ID);
+			pstmt.setInt(1, id);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				promotion = new Promotion();
+				promotion.setCodePromo(rs.getInt("codepromo"));
+				promotion.setLibelle(rs.getString("libelle"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}
+		return promotion;
 	}
 
 	@Override
