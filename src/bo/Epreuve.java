@@ -17,6 +17,19 @@ public class Epreuve {
 	private String niveauObtenu;
 	private Test test;
 	private List<QuestionTirage> listeQuestions;
+	private Utilisateur utilisateur;
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+	public void setTest(Test test) {
+		this.test = test;
+	}
 
 	public Epreuve() {
 		super();

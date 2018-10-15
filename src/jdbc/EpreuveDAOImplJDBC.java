@@ -1,6 +1,7 @@
 package jdbc;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,6 +30,7 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 	private static final String SQL_SELECT_BY_CANDIDAT = "SELECT * FROM EPREUVE WHERE idUtilisateur=?";
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM EPREUVE WHERE idEpreuve=?";
 	private static final String SQL_UPDATE = "UPDATE EPREUVE SET etat=? WHERE idepreuve=?";
+	private static final String SQL_INSERT = "INSERT INTO EPREUVE(dateDebutValidite, dateFinValidite, etat, idTest, idUtilisateur)VALUES(?,?,?,?,?)";
 	
 	public void closeConnection() {
 		if (con != null) {
@@ -44,7 +46,38 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 	
 	@Override
 	public void insert(Epreuve data) throws DALException {
-		// TODO Auto-generated method stub	
+		con = null;
+		pstmt = null;
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
+
+			pstmt.setDate(1, (Date)data.getDateDebutValidite());
+			pstmt.setDate(2, (Date) data.getDateFinValidite());
+			pstmt.setString(3, data.getEtat());
+			pstmt.setInt(4, data.getTest().getIdTest());
+			pstmt.setInt(5, data.getUtilisateur().getIdUtilistaeur());
+
+			int nbRows = pstmt.executeUpdate();
+			if (nbRows == 1) {
+				ResultSet rs = pstmt.getGeneratedKeys();
+				if (rs.next()) {
+					data.setIdEpreuve(rs.getInt(1));
+				}
+			}
+		} catch (SQLException e) {
+			throw new DALException("Insert theme failed - " + data, e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+
+			} catch (SQLException e) {
+				throw new DALException("close failed - ", e);
+			}
+			closeConnection();
+		}
 	}
 
 	@Override

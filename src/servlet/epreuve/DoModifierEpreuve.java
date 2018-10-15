@@ -15,7 +15,7 @@ public class DoModifierEpreuve extends HttpServlet{
 		HttpSession session = req.getSession();
 	
 		if (String.valueOf(session.getAttribute("collaborateur")).equals("true")) {	
-			this.getServletContext().getRequestDispatcher("/collaborateur/utilisateur/addCandidat.jsp").forward(req, resp);
+			this.getServletContext().getRequestDispatcher("/collaborateur/epreuve/updateEpreuve.jsp").forward(req, resp);
 		} else {
 			req.setAttribute("error", "Droit insuffisant, prendre contact avec un ADMINISTRATEUR");
 			this.getServletContext().getRequestDispatcher("/erreur.jsp").forward(req, resp);

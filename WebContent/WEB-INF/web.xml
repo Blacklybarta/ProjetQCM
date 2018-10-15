@@ -212,6 +212,33 @@
     <url-pattern>/collaborateur/removePromotion</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>CreerEpreuve</servlet-name>
+    <servlet-class>servlet.epreuve.DoCreerEpreuve</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreerEpreuve</servlet-name>
+    <url-pattern>/collaborateur/addEpreuve</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ModifierEpreuve</servlet-name>
+    <servlet-class>servlet.epreuve.DoModifierEpreuve</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifierEpreuve</servlet-name>
+    <url-pattern>/collaborateur/updateEpreuve</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SupprimerEpreuve</servlet-name>
+    <servlet-class>servlet.epreuve.DoSupprimerEpreuve</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SupprimerEpreuve</servlet-name>
+    <url-pattern>/collaborateur/removeEpreuve</url-pattern>
+  </servlet-mapping>
+  
   <!-- Condidat Servlets -->
   
   <servlet>
