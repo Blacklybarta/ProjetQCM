@@ -28,46 +28,42 @@
 			%>
 			<div class="row">
 				<div class="col-12 col-sm-6">
-					<div class="card">
-					  	<h5 class="card-header">Liste des questions</h5>
-					  	<div class="card-body">
-					    	<select multiple
-								style="height: 300px; width: 100%;">
-								<% for (Question u : listeQuestion) { %>
-									<option><%=u.getEnonce()%></option>
-								<% } %>
-							</select>
-					  	</div>
+					<div class="col-12">
+						<div class="card cardQuestions">
+						  	<h5 class="card-header">Liste des questions</h5>
+						  	<div class="card-body">
+						    	<select class="selectAccueilCollaborateur" multiple>
+									<% for (Question u : listeQuestion) { %>
+										<option><%=u.getEnonce()%></option>
+									<% } %>
+								</select>
+						  	</div>
+						</div>
+					</div>
+					<div class="col-12">
+						<div class="card cardThemes">
+						  	<h5 class="card-header">Liste des thèmes</h5>
+						  	<div class="card-body">
+						    	<select  class="selectAccueilCollaborateur" multiple>
+									<% for (Theme u : listeTheme) { %>
+										<option><%=u.getLibelle()%></option>
+									<% } %>
+								</select>
+						  	</div>
+						</div>
 					</div>
 				</div>
 
 				<div class="col-12 col-sm-6">
-					<div class="card">
-					  	<h5 class="card-header">Liste des utilisateurs</h5>
-					  	<div class="card-body">
-					    	<select multiple
-								style="height: 300px; width: 100%;">
+					<div class="card cardUtilisateurs">
+						<h5 class="card-header">Liste des utilisateurs</h5>
+						<div class="card-body">
+						    <select  class="selectAccueilCollaborateur" multiple>
 								<% for (Utilisateur u : listeUtilisateur) { %>
 									<option><%=u.getPrenom() + " " + u.getNom()%></option>
 								<% } %>
 							</select>
-					  	</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-12 col-sm-6">
-					<div class="card">
-					  	<h5 class="card-header">Liste des thèmes</h5>
-					  	<div class="card-body">
-					    	<select multiple
-								style="height: 300px; width: 100%;">
-								<% for (Theme u : listeTheme) { %>
-									<option><%=u.getLibelle()%></option>
-								<% } %>
-							</select>
-					  	</div>
+						</div>
 					</div>
 				</div>
 			</div>
