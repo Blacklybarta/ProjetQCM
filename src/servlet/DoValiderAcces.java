@@ -68,6 +68,7 @@ public class DoValiderAcces extends HttpServlet {
 					req.setAttribute("utilisateur", utilisateur);
 					session.setAttribute("idUtilisateur", utilisateur.getIdUtilistaeur());
 					session.setAttribute("nomUtilisateur", utilisateur.getNom());
+					session.setAttribute("prenomUtilisateur", utilisateur.getPrenom());
 					session.setAttribute("candidat", utilisateur.isCandidat());
 					
 					session.setAttribute("epreuves", epreuves);
@@ -83,6 +84,7 @@ public class DoValiderAcces extends HttpServlet {
 					req.setAttribute("utilisateur", utilisateur);
 					session.setAttribute("idUtilisateur", utilisateur.getIdUtilistaeur());
 					session.setAttribute("nomUtilisateur", utilisateur.getNom());
+					session.setAttribute("prenomUtilisateur", utilisateur.getPrenom());
 					session.setAttribute("collaborateur", utilisateur.isCollaborateur());
 					this.getServletContext().getRequestDispatcher("/collaborateur/gestion.jsp").forward(req, resp);
 				} else {
