@@ -19,6 +19,9 @@
 		<%@include file="../../fragments/menu.jsp"%>
 
 		<div class="col-12">
+			<h2>Création d'une section</h2>
+			<p>Renseignez les informations de la section à créer.</p>
+		
 			<%
 				List<Theme> listeTheme = (ArrayList<Theme>) request.getAttribute("listeThemes");
 				List<Test> listeTest = (ArrayList<Test>) request.getAttribute("listeTests");

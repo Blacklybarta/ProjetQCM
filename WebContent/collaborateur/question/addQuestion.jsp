@@ -18,7 +18,7 @@
 		<%@include file="../../fragments/menu.jsp"%>
 
 		<div class="col-12">
-			<h4>Création d'une nouvelle question</h4>
+			<h2>Création d'une nouvelle question</h2>
 			<%
 				List<Theme> listeTheme = (ArrayList<Theme>) request.getAttribute("listeThemes");
 			%>
