@@ -14,8 +14,10 @@
 		<!-- Menu -->
 		<%@include file="../../fragments/menu.jsp"%>
 
-		<div class="col-xs-12 col-sm-9">
-			<h4>Création d'un nouveau test</h4>
+		<div class="col-12">
+			<h2>Création d'un nouveau test</h2>
+			<p>Renseignez les informations du test que vous souhaitez créer.
+			
 			<form action="/ProjetQCM/collaborateur/addTest" method="post">
 				<div class="row">
 					<div class="col-12 col-sm-2">
@@ -66,7 +68,7 @@
 					</div>
 				</div>
 
-				<a href="<%=request.getContextPath()%>/collaborateur/gestion.jsp"><button
+				<a href="<%=request.getContextPath()%>/validerAcces"><button
 						class="btn btn-secondary" type="button">Annuler</button></a>
 				<button class="btn btn-primary" type="submit">Créer le test</button>
 			</form>
