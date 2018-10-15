@@ -32,7 +32,7 @@
 										<p>Nom : ${epreuve.test.libelle},</p>
 										<p>description : ${epreuve.test.description},</p>
 										<p>Date Fin : ${epreuve.dateFinValidite}</p>
-										
+	
 										<form action="epreuve" method="POST">
 											<input type="hidden" name="idEpreuve" value="${epreuve.idEpreuve}" />
 											<button type="submit">Passer cette �preuve</button>
