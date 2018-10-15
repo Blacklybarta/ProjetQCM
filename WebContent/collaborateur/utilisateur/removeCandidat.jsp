@@ -7,17 +7,19 @@
 </head>
 <body>
 	<div class="container">
-	<!-- Header -->
+		<!-- Header -->
 		<%@include file="../../fragments/header.jsp"%>
 
-		<div class="col-xs-12 col-sm-9">
-			<h2>Suppresion d'un candidat</h2>			
-			<div class="contenuAccueil">
-				<h1>Page en construction</h1>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-3">
+		<!-- Menu -->
+		<%@include file="../../fragments/menu.jsp"%>
+
+		<div class="col-12">
+			<h2>Page en construction</h2>
+			<a href="<%=request.getContextPath()%>/validerAcces"><button
+					class="btn btn-secondary" type="button">Retour</button></a>
 		</div>
 	</div>
+
+	<%@include file="../../fragments/script.jsp"%>
 </body>
 </html>

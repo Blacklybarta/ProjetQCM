@@ -13,10 +13,14 @@
 	<div class="container">
 		<!-- Header -->
 		<%@include file="../../fragments/header.jsp"%>
+
+		<!-- Menu -->
+		<%@include file="../../fragments/menu.jsp"%>
+
 		<%
 			List<Promotion> listePromotion = (ArrayList<Promotion>) request.getAttribute("listePromotions");
 		%>
-		<div class="col-xs-12 col-sm-9">
+		<div class="col-12">
 			<h2>Création d'un candidat</h2>
 			<p>Rentrer les informations du candidat que vous souhaitez créer.</p>
 			<div class="contenuAccueil">
@@ -98,7 +102,8 @@
 				</form>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-3"></div>
 	</div>
+	
+	<%@include file="../../fragments/script.jsp"%>
 </body>
 </html>
