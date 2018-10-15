@@ -34,7 +34,8 @@ public class DoCreerTheme extends HttpServlet {
 		theme.setLibelle(libelle);
 		try {
 			DAOFactory.getThemeDAO().insert(theme);
-			this.getServletContext().getRequestDispatcher("/collaborateur/gestion.jsp").forward(req, resp);
+			resp.sendRedirect("/ProjetQCM/validerAcces");
+			
 		} catch (DALException e) {
 			e.printStackTrace();
 		}

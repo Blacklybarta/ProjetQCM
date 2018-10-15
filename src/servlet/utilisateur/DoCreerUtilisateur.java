@@ -57,7 +57,7 @@ public class DoCreerUtilisateur extends HttpServlet{
 			String[] values = req.getParameterValues("idPromotion");
 			utilisateur.setCodePromo(Integer.parseInt(values[0]));
 			DAOFactory.getUtilisateurDAO().insert(utilisateur);
-			this.getServletContext().getRequestDispatcher("/collaborateur/gestion.jsp").forward(req, resp);
+			resp.sendRedirect("/ProjetQCM/validerAcces");
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

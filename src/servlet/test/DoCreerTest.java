@@ -38,7 +38,7 @@ public class DoCreerTest extends HttpServlet{
 			test.setSeuilHaut(Integer.parseInt(req.getParameter("seuilHaut")));
 			test.setSeuilBas(Integer.parseInt(req.getParameter("seuilBas")));
 			DAOFactory.getTestDAO().insert(test);
-			this.getServletContext().getRequestDispatcher("/collaborateur/gestion.jsp").forward(req, resp);
+			resp.sendRedirect("/ProjetQCM/validerAcces");
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (DALException e) {

@@ -31,7 +31,7 @@ public class DoCreerPromotion extends HttpServlet{
 			Promotion promotion = new Promotion();
 			promotion.setLibelle(req.getParameter("nom"));
 			DAOFactory.getPromotionDAO().insert(promotion);
-			this.getServletContext().getRequestDispatcher("/collaborateur/gestion.jsp").forward(req, resp);
+			resp.sendRedirect("/ProjetQCM/validerAcces");
 		} catch (DALException e) {
 			e.printStackTrace();
 		}

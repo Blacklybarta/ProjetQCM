@@ -51,7 +51,7 @@ public class DoCreerSection extends HttpServlet {
 			section.setTheme(Integer.parseInt(valuesTheme[0]));
 			section.setTest(Integer.parseInt(valuesTest[0]));
 			DAOFactory.getSectionDAO().insert(section);
-			this.getServletContext().getRequestDispatcher("/collaborateur/gestion.jsp").forward(req, resp);
+			resp.sendRedirect("/ProjetQCM/validerAcces");
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (DALException e) {

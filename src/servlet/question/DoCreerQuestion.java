@@ -99,7 +99,7 @@ public class DoCreerQuestion extends HttpServlet {
 			prop4.setQuestion(question);
 			DAOFactory.getPropositionDAO().insert(prop4);
 
-			this.getServletContext().getRequestDispatcher("/collaborateur/gestion.jsp").forward(req, resp);
+			resp.sendRedirect("/ProjetQCM/validerAcces");
 
 		} catch (NumberFormatException e) {
 			e.printStackTrace();

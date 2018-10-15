@@ -50,7 +50,7 @@ public class DoModifierTheme extends HttpServlet{
 				theme.setLibelle(libelle);
 				theme.setIdTheme(Integer.parseInt(req.getParameter("id")));
 				DAOFactory.getThemeDAO().update(theme);
-				this.getServletContext().getRequestDispatcher("/collaborateur/gestion.jsp").forward(req, resp);
+				resp.sendRedirect("/ProjetQCM/validerAcces");
 			}
 		} catch (NumberFormatException | DALException e) {
 			req.setAttribute("error", e.getMessage());
