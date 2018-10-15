@@ -15,7 +15,7 @@
 		<%@include file="../../fragments/menu.jsp"%>
 
 		<div class="col-12">
-			<h2>Création d'un candidat</h2>
+			<h2>Création d'une promotion</h2>
 			<p>Rentrer le nom de la promotion que vous souhaitez créer.</p>
 
 			<form action="/ProjetQCM/collaborateur/addPromotion" method="post">
