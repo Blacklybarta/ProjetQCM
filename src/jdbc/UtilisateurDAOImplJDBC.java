@@ -320,4 +320,10 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 		return null;
 	}
 
+	@Override
+	public void updateEtat(Utilisateur data) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -15,6 +15,7 @@ import bo.Question;
 import bo.QuestionTirage;
 import bo.Section;
 import bo.Test;
+import bo.Theme;
 import bo.Utilisateur;
 import dal.DALException;
 import dal.DAO;
@@ -29,8 +30,10 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 	
 	private static final String SQL_SELECT_BY_CANDIDAT = "SELECT * FROM EPREUVE WHERE idUtilisateur=?";
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM EPREUVE WHERE idEpreuve=?";
-	private static final String SQL_UPDATE = "UPDATE EPREUVE SET etat=? WHERE idepreuve=?";
+	private static final String SQL_UPDATE_ETAT = "UPDATE EPREUVE SET etat=? WHERE idepreuve=?";
+	private static final String SQL_SELECTALL = "SELECT * FROM EPREUVE ";
 	private static final String SQL_INSERT = "INSERT INTO EPREUVE(dateDebutValidite, dateFinValidite, etat, idTest, idUtilisateur)VALUES(?,?,?,?,?)";
+	private static final String SQL_UPDATE = "UPDATE EPREUVE SET dateDebutValidite=?,dateFinValidite=?,etat=?,idTest=?,idUtilisateur=? WHERE idepreuve=?";
 	
 	public void closeConnection() {
 		if (con != null) {
@@ -87,12 +90,17 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 		try {
 			con = DBConnection.getConnection();
 			pstmt = con.prepareStatement(SQL_UPDATE);
-			pstmt.setString(1, data.getEtat());			
-			pstmt.setInt(2, data.getIdEpreuve());
+			pstmt.setDate(1, (Date) data.getDateDebutValidite());
+			pstmt.setDate(2,(Date) data.getDateFinValidite());
+			pstmt.setString(3, data.getEtat());
+			pstmt.setInt(4, data.getTest().getIdTest());
+			pstmt.setInt(5, data.getUtilisateur().getIdUtilistaeur());
+			pstmt.setInt(6, data.getIdEpreuve());
+			
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
-			throw new DALException("Update theme failed - " + data, e);
+			throw new DALException("Update utilisateur failed - " + data, e);
 		} finally {
 			try {
 				if (pstmt != null) {
@@ -102,7 +110,8 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 				e.printStackTrace();
 			}
 			closeConnection();
-		}		
+
+		}
 	}
 
 	@Override
@@ -203,8 +212,50 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 
 	@Override
 	public List<Epreuve> selectAll() throws DALException {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			con = DBConnection.getConnection();
+			stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(SQL_SELECTALL);
+
+			Epreuve epreuve= null;
+			listeEpreuves.clear();
+			while (rs.next()) {
+				epreuve = new Epreuve();
+				epreuve.setIdEpreuve(rs.getInt("idepreuve"));
+				epreuve.setDateDebutValidite(rs.getDate("dateDebutValidite"));
+				epreuve.setDateFinValidite(rs.getDate("dateFinValidite"));
+				epreuve.setEtat(rs.getString("etat"));
+				if(rs.getString("tempsEcoule") != null){
+					epreuve.setTempsEcoule(Integer.parseInt(rs.getString("tempsEcoule")));
+				}
+				if(rs.getFloat("note_obtenu") != 0){
+					epreuve.setNoteObtenu(rs.getFloat("note_obtenu"));
+				}
+				if(rs.getString("niveau_obtenu") != null){
+					epreuve.setNiveauObtenu(rs.getString("niveau_obtenu"));
+				}
+				epreuve.setTest(rs.getInt("idTest"));
+				Utilisateur user = new Utilisateur();
+				user.setIdUtilistaeur(rs.getInt("idUtilisateur"));
+				epreuve.setUtilisateur(user);			
+				listeEpreuves.add(epreuve);
+			}
+		} catch (SQLException e) {
+			throw new DALException("selectAll failed - ", e);
+		} finally {
+			try {
+
+				if (stmt != null) {
+					stmt.close();
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			closeConnection();
+		}
+		return listeEpreuves;
 	}
 
 	@Override
@@ -254,6 +305,31 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 	public List<Proposition> selectByIdQuestion(int idQuestion) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void updateEtat(Epreuve data) throws DALException {
+		con = null;
+		pstmt = null;
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_UPDATE_ETAT);
+			pstmt.setString(1, data.getEtat());			
+			pstmt.setInt(2, data.getIdEpreuve());
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new DALException("Update theme failed - " + data, e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}		
 	}
 
 }
