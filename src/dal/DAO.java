@@ -39,4 +39,6 @@ public interface DAO<T> {
 	public QuestionTirage selectByIdEpreuve(int idEpreuve, int nbQuestion);
 
 	public List<Proposition> selectByIdQuestion(int idQuestion);
+
+	public List<Proposition> selectByEstBonne(int idQuestion);
 }

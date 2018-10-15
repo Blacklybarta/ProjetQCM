@@ -13,6 +13,7 @@ import bo.Proposition;
 import bo.Question;
 import bo.QuestionTirage;
 import bo.Section;
+import bo.Theme;
 import dal.DALException;
 import dal.DAO;
 import dal.DBConnection;
@@ -23,10 +24,12 @@ public class PropositionDAOImplJDBC implements DAO<Proposition> {
 	private PreparedStatement pstmt;
 	private Statement stmt;
 	private List<Proposition> listePropositions = new ArrayList<>();
-	
+
 	private static final String SQL_INSERT = "INSERT INTO PROPOSITION(enonce,estBonne,idquestion)VALUES(?,?,?)";
 	private static final String SQL_SELECT_BY_ID_QUESTION = "SELECT * FROM PROPOSITION WHERE idQuestion=?";
-	
+	private static final String SQL_SELECT_BY_EST_BONNE = "SELECT * FROM PROPOSITION WHERE idQuestion=? AND estBonne=1";
+	private static final String SQL_SELECT_BY_ID = "SELECT * FROM PROPOSITION WHERE idproposition=?";
+
 	public void closeConnection() {
 		if (con != null) {
 			try {
@@ -38,7 +41,7 @@ public class PropositionDAOImplJDBC implements DAO<Proposition> {
 			con = null;
 		}
 	}
-	
+
 	@Override
 	public void insert(Proposition data) throws DALException {
 		con = null;
@@ -46,7 +49,7 @@ public class PropositionDAOImplJDBC implements DAO<Proposition> {
 		try {
 			con = DBConnection.getConnection();
 			pstmt = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
-			
+
 			pstmt.setString(1, data.getEnonce());
 			pstmt.setBoolean(2, data.isEstBonne());
 			pstmt.setInt(3, data.getQuestion().getIdQuestion());
@@ -70,7 +73,7 @@ public class PropositionDAOImplJDBC implements DAO<Proposition> {
 				throw new DALException("close failed - ", e);
 			}
 			closeConnection();
-		}	
+		}
 	}
 
 	@Override
@@ -82,19 +85,46 @@ public class PropositionDAOImplJDBC implements DAO<Proposition> {
 	@Override
 	public void update(Proposition data) throws DALException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(int id) throws DALException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public Proposition selectById(int id) throws DALException {
-		// TODO Auto-generated method stub
-		return null;
+		con = null;
+		pstmt = null;
+		ResultSet rs = null;
+		Proposition proposition = null;
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_SELECT_BY_ID);
+			pstmt.setInt(1, id);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				proposition.setEstBonne(rs.getBoolean("estBonne"));
+				proposition.setIdProposition(rs.getInt("idproposition"));
+				proposition.setEnonce(rs.getString("enonce"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}
+		return proposition;
 	}
 
 	@Override
@@ -151,28 +181,65 @@ public class PropositionDAOImplJDBC implements DAO<Proposition> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public List<Proposition> selectByIdQuestion(int idQuestion) {
 		con = null;
 		pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			con = DBConnection.getConnection();
 			pstmt = con.prepareStatement(SQL_SELECT_BY_ID_QUESTION);
 			pstmt.setInt(1, idQuestion);
 
 			rs = pstmt.executeQuery();
-			while (rs.next())
-			{
+			while (rs.next()) {
 				Proposition proposition = new Proposition();
 
 				proposition.setEstBonne(rs.getBoolean("estBonne"));
 				proposition.setIdProposition(rs.getInt("idproposition"));
 				proposition.setEnonce(rs.getString("enonce"));
-				//proposition.setQuestion(rs.getBoolean("estBonne"));
-				
+				// proposition.setQuestion(rs.getBoolean("estBonne"));
+
+				listePropositions.add(proposition);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}
+		return listePropositions;
+	}
+
+	@Override
+	public List<Proposition> selectByEstBonne(int idQuestion) {
+		con = null;
+		pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_SELECT_BY_EST_BONNE);
+			pstmt.setInt(1, idQuestion);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Proposition proposition = new Proposition();
+
+				proposition.setEstBonne(rs.getBoolean("estBonne"));
+				proposition.setIdProposition(rs.getInt("idproposition"));
+				proposition.setEnonce(rs.getString("enonce"));
+				// proposition.setQuestion(rs.getBoolean("estBonne"));
+
 				listePropositions.add(proposition);
 			}
 

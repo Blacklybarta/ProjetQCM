@@ -14,7 +14,6 @@ import bo.Question;
 import bo.QuestionTirage;
 import bo.Section;
 import bo.Theme;
-import bo.Test;
 import dal.DALException;
 import dal.DAO;
 import dal.DBConnection;

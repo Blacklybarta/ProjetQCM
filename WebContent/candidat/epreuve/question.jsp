@@ -20,15 +20,33 @@
 		
 			<h2>${questionTirage.question.enonce}</h2>
 			
-			<c:forEach items="${questionTirage.question.listeProposition}" var="proposition">
-				<input type="checkbox" id="prop${proposition.idProposition}" name="${proposition.idProposition}"><label for="prop${proposition.idProposition}">${proposition.enonce}</label> 
-			</c:forEach>
+			${nbQuestionsTotal}
+			${questionTirage.numOrdre}
 			
-			<form action="../question/${questionTirage.numOrdre + 1}" method="POST">
+			<c:choose>
+				<c:when test="${nbQuestionsTotal == questionTirage.numOrdre}">
+					<form action="../question/terminer" method="POST">
+				</c:when>
+				<c:otherwise>
+					<form action="../question/${questionTirage.numOrdre + 1}" method="POST">
+				</c:otherwise>
+			</c:choose>
+			
+				<c:forEach items="${questionTirage.question.listeProposition}" var="proposition">
+					<input type="checkbox" value="${proposition.idProposition}" name="proposition" id="prop${proposition.idProposition}">
+					<label for="prop${proposition.idProposition}">${proposition.enonce}</label> 
+				</c:forEach>
 
-				<input type="hidden" name="idEpreuve" value="${epreuve.idEpreuve}" />
-				
-				<button type="submit">Question Suivante</button>
+				<input type="hidden" name="idQuestion" value="${questionTirage.question.idQuestion}" />
+					
+				<c:choose>
+					<c:when test="${nbQuestionsTotal == questionTirage.numOrdre}">
+						<button type="submit">Terminer Test</button>
+					</c:when>
+					<c:otherwise>
+						<button type="submit">Question Suivante</button>
+					</c:otherwise>
+				</c:choose>
 			</form>
 		</div>
 	</div>

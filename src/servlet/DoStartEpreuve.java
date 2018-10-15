@@ -26,7 +26,7 @@ public class DoStartEpreuve extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		super.doGet(req, resp);
+		super.doPost(req, resp);
 	}
 
 	@Override
@@ -36,8 +36,6 @@ public class DoStartEpreuve extends HttpServlet {
 		String questionNum = params[params.length-1];
 		
 		HttpSession session = req.getSession();
-		
-		System.out.println(questionNum);
 		
 		if (questionNum.equals("start"))
 		{
@@ -56,21 +54,136 @@ public class DoStartEpreuve extends HttpServlet {
 			{
 				generateQuestions(epreuve);
 			}
-			else if (epreuve.getEtat().equals(EN_COURS))
+
+			
+			if(session.getAttribute("answers") == null)
 			{
-				recupererQuestion(session, 1);
-				
-				this.getServletContext().getRequestDispatcher("/candidat/epreuve/question.jsp").forward(req, resp);
+				session.setAttribute("answers", new ArrayList<ArrayList<String>>());
 			}
+			
+			recupererQuestion(session, 1);
+				
+			this.getServletContext().getRequestDispatcher("/candidat/epreuve/question.jsp").forward(req, resp);
+		}
+		else if(questionNum.equals("terminer"))
+		{
+			updateAnswers(req.getParameterValues("proposition"), session);
+			
+			calculNote(session);
 		}
 		else if(isNumeric(questionNum))
 		{
-			recupererQuestion(session, Integer.valueOf(questionNum));
+			int nbQuestionsTotal = 0;
+			List<Section> sections = new ArrayList();
 			
-			this.getServletContext().getRequestDispatcher("/candidat/epreuve/question.jsp").forward(req, resp);
+			try {
+				sections = DAOFactory.getSectionDAO().selectByIdTest((Integer) session.getAttribute("currentEpreuveId"));
+			} catch (NumberFormatException | DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			for (Section section : sections)
+			{
+				nbQuestionsTotal += section.getNbQuestionATirer();
+			}
+			
+			if (req.getParameterValues("proposition") != null)
+			{
+				updateAnswers(req.getParameterValues("proposition"), session);
+			}
+			
+			System.out.println("Questions total : " + nbQuestionsTotal + " current : " + questionNum);
+			
+			session.setAttribute("nbQuestionsTotal", nbQuestionsTotal);
+			
+			if (Integer.valueOf(questionNum) <= nbQuestionsTotal)
+			{
+				recupererQuestion(session, Integer.valueOf(questionNum));
+				
+				this.getServletContext().getRequestDispatcher("/candidat/epreuve/question.jsp").forward(req, resp);
+			}
+			else
+			{
+				System.out.println("La question n'existe pas");
+			}
 		}
 	}
 	
+	private void calculNote(HttpSession session) {
+		ArrayList<ArrayList<String>> answers = new ArrayList<ArrayList<String>>();
+		
+		answers = (ArrayList<ArrayList<String>>) session.getAttribute("answers");
+		
+		for (ArrayList<String> answerList : answers)
+		{
+			int i = 0;
+			int idQuestion;
+			Question question = null;
+			
+			for (String answer : answerList)
+			{
+				i++;
+				
+				if (i == 1)
+				{
+					//Récupération de la question
+					idQuestion = Integer.valueOf(answer);
+					try {
+						question = DAOFactory.getQuestionDAO().selectById(idQuestion);
+					} catch (DALException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					//récupération des propositions bonnes
+					try {
+						DAOFactory.getPropositionDAO().selectByEstBonne(idQuestion);
+					} catch (NumberFormatException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				else
+				{
+					//comparaison des réponses choisies
+					Integer.valueOf(answer);
+				}
+			}
+		}
+	}
+
+	private void updateAnswers(String[] results, HttpSession session) {
+		ArrayList<ArrayList<String>> answers = new ArrayList<ArrayList<String>>();
+		ArrayList<String> answer = new ArrayList();
+		
+		answers = (ArrayList<ArrayList<String>>) session.getAttribute("answers");
+		
+		answer.add(String.valueOf(session.getAttribute("currentEpreuveId")));
+		
+		if (results != null)
+		{
+			for (String result : results) {
+				answer.add(result); 
+			}
+			
+			answers.add(answer);
+			
+			session.setAttribute("answers", answers);
+		}
+		
+		//Affichage des réponses données
+		for (ArrayList<String> nanswer : answers)
+		{
+			System.out.print("Question :");
+			for (String panswer : nanswer)
+			{
+				System.out.print(" " + panswer);
+			}
+			System.out.println();
+		}
+	}
+
 	private void recupererQuestion(HttpSession session, int numQuestion)
 	{
 		int epreuveId = (Integer) session.getAttribute("currentEpreuveId");
@@ -95,7 +208,7 @@ public class DoStartEpreuve extends HttpServlet {
 			
 			//Récupération des sections de l'épreuve
 			try {
-				DAOFactory.getEpreuveDAO().update(epreuve);
+				DAOFactory.getEpreuveDAO().updateEtat(epreuve);
 				sections = DAOFactory.getSectionDAO().selectByIdTest(epreuve.getTest().getIdTest());
 			} catch (DALException e) {
 				e.printStackTrace();
@@ -123,15 +236,10 @@ public class DoStartEpreuve extends HttpServlet {
 			{
 				index ++;
 
-				System.out.println("On y passe 1");
-				System.out.println(question.getEnonce());
 				QuestionTirage questionTirage = questionToTirage(question, epreuve, index);
 				
 				try {
 					DAOFactory.getQuestionTirageDAO().insert(questionTirage);
-
-					System.out.println("On y passe 2");
-					System.out.println(questionTirage.getQuestion().getEnonce());
 				} catch (DALException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -163,4 +271,5 @@ public class DoStartEpreuve extends HttpServlet {
 		
 		return qTirage;
 	}
+
 }
