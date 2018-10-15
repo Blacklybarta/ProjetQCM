@@ -29,8 +29,8 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM UTILISATEUR WHERE idUtilisateur=?";
 	private static final String SQL_INSERT = "INSERT INTO UTILISATEUR(nom,prenom,email,password,isCandidat,isCollaborateur,codeProfil,codepromo) VALUES(?,?,?,?,?,?,?,?)";
 	private static final String SQL_SELECTALL = "SELECT * FROM UTILISATEUR ORDER BY nom ASC;";
-	private static final String SQL_DELETE = "UPDATE UTILISATEUR SET administrateur=?,conducteur=? WHERE idUtilisateur=?";
-	private static final String SQL_UPDATE = "UPDATE UTILISATEUR SET identifiant=?,mdp=?,nom=?,prenom=?,administrateur=?,conducteur=? WHERE idUtilisateur=?";
+	//private static final String SQL_DELETE = "UPDATE UTILISATEUR SET administrateur=?,conducteur=? WHERE idUtilisateur=?";
+	private static final String SQL_UPDATE = "UPDATE UTILISATEUR SET nom=?,prenom=?,email=?,password=?,isCandidat=?,isCollaborateur=?, codePromo=? WHERE idUtilisateur=?";
 
 	public void closeConnection() {
 		if (con != null) {
@@ -89,15 +89,15 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 		pstmt = null;
 		try {
 			con = DBConnection.getConnection();
-//			pstmt = con.prepareStatement(SQL_UPDATE);
-//			pstmt.setString(1, data.getIdentifiant());
-//			pstmt.setString(2, data.getMdp());
-//			pstmt.setString(3, data.getNom());
-//			pstmt.setString(4, data.getPrenom());
-//			pstmt.setBoolean(5, data.isAdministrateur());
-//			pstmt.setBoolean(6, data.isConducteur());
-//			pstmt.setInt(7, data.getId());
-
+			pstmt = con.prepareStatement(SQL_UPDATE);
+			pstmt.setString(1, data.getNom());
+			pstmt.setString(2, data.getPrenom());
+			pstmt.setString(3, data.getEmail());
+			pstmt.setString(4, data.getPassword());
+			pstmt.setBoolean(5, data.isCandidat());
+			pstmt.setBoolean(6, data.isCollaborateur());
+			pstmt.setInt(7, data.getCodePromo());
+			pstmt.setInt(8, data.getIdUtilistaeur());
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -126,7 +126,7 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 		pstmt = null;
 		try {
 			con = DBConnection.getConnection();
-			pstmt = con.prepareStatement(SQL_DELETE);
+			//pstmt = con.prepareStatement(SQL_DELETE);
 
 			pstmt.setBoolean(1, false);
 			pstmt.setBoolean(2, false);

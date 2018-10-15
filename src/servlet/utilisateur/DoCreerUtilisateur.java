@@ -48,7 +48,7 @@ public class DoCreerUtilisateur extends HttpServlet{
 			utilisateur.setPassword(req.getParameter("password"));
 			
 			String choix = req.getParameter("role");
-			if(choix.equals("canidat")){
+			if(choix.equals("candidat")){
 				utilisateur.setCandidat(true);
 			}else{
 				utilisateur.setCollaborateur(true);
