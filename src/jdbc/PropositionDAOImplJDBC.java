@@ -260,14 +260,23 @@ public class PropositionDAOImplJDBC implements DAO<Proposition> {
 
 	@Override
 	public void updateEtat(Proposition data) throws DALException {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
 	public void updateNote(int idEpreuve, int note) throws DALException {
 		// TODO Auto-generated method stub
-		
+	}
+
+	@Override
+	public Proposition selectSectionByIdTestAndIdTheme(int idTest, int idTheme) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateSectionByIdTestAndIdTheme(Proposition data, int idTest, int idTheme) throws DALException {
+		// TODO Auto-generated method stub
 	}
 
 }

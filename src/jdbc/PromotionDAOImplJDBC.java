@@ -245,8 +245,16 @@ public class PromotionDAOImplJDBC implements DAO<Promotion> {
 
 	@Override
 	public void updateNote(int idEpreuve, int note) throws DALException {
-		// TODO Auto-generated method stub
+	}
 		
+	public Promotion selectSectionByIdTestAndIdTheme(int idTest, int idTheme) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateSectionByIdTestAndIdTheme(Promotion data, int idTest, int idTheme) throws DALException {
+		// TODO Auto-generated method stub
 	}
 
 }

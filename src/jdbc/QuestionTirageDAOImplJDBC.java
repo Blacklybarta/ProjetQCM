@@ -198,9 +198,19 @@ public class QuestionTirageDAOImplJDBC implements DAO<QuestionTirage> {
 	}
 
 	@Override
+
 	public void updateNote(int idEpreuve, int note) throws DALException {
-		// TODO Auto-generated method stub
 		
+	}
+
+	public QuestionTirage selectSectionByIdTestAndIdTheme(int idTest, int idTheme) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateSectionByIdTestAndIdTheme(QuestionTirage data, int idTest, int idTheme) throws DALException {
+		// TODO Auto-generated method stub		
 	}
 
 }

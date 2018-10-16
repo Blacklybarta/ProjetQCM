@@ -1,6 +1,7 @@
 package jdbc;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,7 +32,9 @@ public class TestDAOImplJDBC implements DAO<Test> {
 	private static final String SQL_INSERT = "INSERT INTO TEST(libelle,description,duree,seuil_haut,seuil_bas)VALUES(?,?,?,?,?)";
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM TEST WHERE idtest=?";
 	private static final String SQL_SELECTALL = "SELECT * FROM TEST";
+	private static final String SQL_UPDATE = "UPDATE TEST SET libelle=?,description=?,duree=?,seuil_haut=?,seuil_bas=? WHERE idtest=?";
 
+	
 	public void closeConnection() {
 		if (con != null) {
 			try {
@@ -81,8 +84,31 @@ public class TestDAOImplJDBC implements DAO<Test> {
 
 	@Override
 	public void update(Test data) throws DALException {
-		// TODO Auto-generated method stub
+		con = null;
+		pstmt = null;
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_UPDATE);
+			pstmt.setString(1,data.getLibelle());
+			pstmt.setString(2, data.getDescription());
+			pstmt.setInt(3, data.getDuree());
+			pstmt.setInt(4, data.getSeuilHaut());
+			pstmt.setInt(5, data.getSeuilBas());
+			pstmt.setInt(6, data.getIdTest());		
+			pstmt.executeUpdate();
 
+		} catch (SQLException e) {
+			throw new DALException("Update utilisateur failed - " + data, e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}
 	}
 
 	@Override
@@ -242,6 +268,16 @@ public class TestDAOImplJDBC implements DAO<Test> {
 
 	@Override
 	public void updateNote(int idEpreuve, int note) throws DALException {
+		
+	}
+
+	public Test selectSectionByIdTestAndIdTheme(int idTest, int idTheme) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateSectionByIdTestAndIdTheme(Test data, int idTest, int idTheme) throws DALException {
 		// TODO Auto-generated method stub
 		
 	}

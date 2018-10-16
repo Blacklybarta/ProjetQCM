@@ -278,6 +278,16 @@ public class QuestionDAOImplJDBC implements DAO<Question>{
 
 	@Override
 	public void updateNote(int idEpreuve, int note) throws DALException {
+		
+	}
+
+	public Question selectSectionByIdTestAndIdTheme(int idTest, int idTheme) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateSectionByIdTestAndIdTheme(Question data, int idTest, int idTheme) throws DALException {
 		// TODO Auto-generated method stub
 		
 	}

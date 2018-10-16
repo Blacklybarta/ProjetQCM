@@ -363,5 +363,16 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 			closeConnection();
 		}		
 	}
+		
+	@Override
+	public Epreuve selectSectionByIdTestAndIdTheme(int idTest, int idTheme) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateSectionByIdTestAndIdTheme(Epreuve data, int idTest, int idTheme) throws DALException {
+		// TODO Auto-generated method stub
+	}
 
 }

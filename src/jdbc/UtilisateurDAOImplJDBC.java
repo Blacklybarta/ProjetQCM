@@ -334,8 +334,17 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 
 	@Override
 	public void updateNote(int idEpreuve, int note) throws DALException {
-		// TODO Auto-generated method stub
 		
+	}
+
+	public Utilisateur selectSectionByIdTestAndIdTheme(int idTest, int idTheme) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateSectionByIdTestAndIdTheme(Utilisateur data, int idTest, int idTheme) {
+		// TODO Auto-generated method stub	
 	}
 
 }
