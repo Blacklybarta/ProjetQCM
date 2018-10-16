@@ -32,11 +32,11 @@
 						<div class="card cardQuestions">
 						  	<h5 class="card-header">Liste des questions</h5>
 						  	<div class="card-body">
-						    	<select class="selectAccueilCollaborateur" multiple>
-									<% for (Question u : listeQuestion) { %>
-										<option><%=u.getEnonce()%></option>
-									<% } %>
-								</select>
+						  		<% for (Question u : listeQuestion) { %>
+						  			<div>
+										<%=u.getEnonce()%> <i class="fas fa-pen pen"></i> <i class="fas fa-trash poubelle"></i>
+									</div>
+								<% } %>
 						  	</div>
 						</div>
 					</div>
@@ -44,11 +44,11 @@
 						<div class="card cardThemes">
 						  	<h5 class="card-header">Liste des thèmes</h5>
 						  	<div class="card-body">
-						    	<select  class="selectAccueilCollaborateur" multiple>
-									<% for (Theme u : listeTheme) { %>
-										<option><%=u.getLibelle()%></option>
-									<% } %>
-								</select>
+						  		<% for (Theme u : listeTheme) { %>
+						  			<div>
+										<%=u.getLibelle()%> <i class="fas fa-pen pen"></i> <i class="fas fa-trash poubelle"></i>
+									</div>
+								<% } %>
 						  	</div>
 						</div>
 					</div>
@@ -58,11 +58,11 @@
 					<div class="card cardUtilisateurs">
 						<h5 class="card-header">Liste des utilisateurs</h5>
 						<div class="card-body">
-						    <select  class="selectAccueilCollaborateur" multiple>
-								<% for (Utilisateur u : listeUtilisateur) { %>
-									<option><%=u.getPrenom() + " " + u.getNom()%></option>
-								<% } %>
-							</select>
+							<% for (Utilisateur u : listeUtilisateur) { %>
+								<div class="utilisateur">
+									<%=u.getPrenom() + " " + u.getNom()%> <i class="fas fa-pen pen"></i> <i class="fas fa-trash poubelle"></i>
+								</div>
+							<% } %>
 						</div>
 					</div>
 				</div>

@@ -24,9 +24,37 @@ header, .card-header {
 }
 
 .cardUtilisateurs {
-	height: 100%;
+	max-height: 600px;
+}
+
+.cardUtilisateurs card-body, .cardQuestions card-body, .cardThemes card-body {
+	overflow: auto;
 }
 
 .cardQuestions, .cardThemes {
 	height: 300px;
+}
+
+.sousUL {
+	list-style:none;
+}
+
+header {
+	position: relative;
+}
+
+.connecte {
+	position: absolute;
+	right: 10px;
+	bottom: -10px;
+}
+
+.pen, .poubelle {
+	float: right;
+	margin-top: 3px;
+	margin-right: 8px;
+}
+
+.pen:hover, .poubelle:hover {
+	cursor: pointer;
 }

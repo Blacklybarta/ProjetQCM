@@ -26,7 +26,7 @@
 				<c:if test="${empty myObject.featuresList}">
 					<c:forEach items="${epreuves}" var="epreuve">
 						<c:if test="${epreuve.etat == 'EA'}">
-							<li>
+							<li class="sousUL">
 								<ul>
 									<li>
 										<p>Nom : ${epreuve.test.libelle},</p>
@@ -42,7 +42,7 @@
 							</li>
 						</c:if>
 						<c:if test="${epreuve.etat == 'EC'}">
-							<li>
+							<li class="sousUL">
 								<ul>
 									<li>
 										<p>Nom : ${epreuve.test.libelle},</p>
@@ -63,7 +63,7 @@
 				<c:if test="${empty myObject.featuresList}">
 					<c:forEach items="${epreuves}" var="epreuve">
 						<c:if test="${epreuve.etat == 'T'}">
-							<li>
+							<li class="sousUL">
 								<ul>
 									<li>
 										${epreuve.test.libelle}
