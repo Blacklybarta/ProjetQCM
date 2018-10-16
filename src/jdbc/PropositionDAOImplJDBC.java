@@ -234,12 +234,10 @@ public class PropositionDAOImplJDBC implements DAO<Proposition> {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Proposition proposition = new Proposition();
-
 				proposition.setEstBonne(rs.getBoolean("estBonne"));
 				proposition.setIdProposition(rs.getInt("idproposition"));
 				proposition.setEnonce(rs.getString("enonce"));
 				proposition.setQuestion(rs.getInt("idquestion"));
-
 				listePropositions.add(proposition);
 			}
 
