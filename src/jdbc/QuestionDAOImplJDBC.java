@@ -1,6 +1,7 @@
 package jdbc;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,6 +31,8 @@ public class QuestionDAOImplJDBC implements DAO<Question>{
 	private static final String SQL_SELECTALL = "SELECT * FROM QUESTION ";
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM QUESTION WHERE idquestion=?";
 	private static final String SQL_SELECT_BY_THEME_RANDOM = "SELECT TOP # * FROM QUESTION WHERE idTheme=? ORDER BY NEWID()";
+	private static final String SQL_UPDATE = "UPDATE QUESTION SET enonce=?,points=?,idtheme=? WHERE idquestion=?";
+
 	
 	public void closeConnection() {
 		if (con != null) {
@@ -89,8 +92,29 @@ public class QuestionDAOImplJDBC implements DAO<Question>{
 
 	@Override
 	public void update(Question data) throws DALException {
-		// TODO Auto-generated method stub
-		
+		con = null;
+		pstmt = null;
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_UPDATE);
+			pstmt.setString(1,  data.getEnonce());
+			pstmt.setInt(2, data.getPoints());
+			pstmt.setInt(3, data.getTheme().getIdTheme());
+			pstmt.setInt(4, data.getIdQuestion());
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new DALException("Update utilisateur failed - " + data, e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}		
 	}
 
 	@Override

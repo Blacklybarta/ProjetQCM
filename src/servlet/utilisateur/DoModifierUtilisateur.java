@@ -69,7 +69,5 @@ public class DoModifierUtilisateur extends HttpServlet {
 			req.setAttribute("error", e.getMessage());
 			this.getServletContext().getRequestDispatcher("/erreur.jsp").forward(req, resp);
 		}
-
 	}
-
 }

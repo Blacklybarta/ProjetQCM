@@ -29,7 +29,10 @@ public class PropositionDAOImplJDBC implements DAO<Proposition> {
 	private static final String SQL_SELECT_BY_ID_QUESTION = "SELECT * FROM PROPOSITION WHERE idQuestion=?";
 	private static final String SQL_SELECT_BY_EST_BONNE = "SELECT * FROM PROPOSITION WHERE idQuestion=? AND estBonne=1";
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM PROPOSITION WHERE idproposition=?";
+	private static final String SQL_UPDATE = "UPDATE PROPOSITION SET enonce=?,estBonne=? WHERE idproposition=?";
 
+	
+	
 	public void closeConnection() {
 		if (con != null) {
 			try {
@@ -84,8 +87,28 @@ public class PropositionDAOImplJDBC implements DAO<Proposition> {
 
 	@Override
 	public void update(Proposition data) throws DALException {
-		// TODO Auto-generated method stub
+		con = null;
+		pstmt = null;
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_UPDATE);
+			pstmt.setString(1,  data.getEnonce());
+			pstmt.setBoolean(2, data.isEstBonne());
+			pstmt.setInt(3, data.getIdProposition());
+			pstmt.executeUpdate();
 
+		} catch (SQLException e) {
+			throw new DALException("Update utilisateur failed - " + data, e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}		
 	}
 
 	@Override
