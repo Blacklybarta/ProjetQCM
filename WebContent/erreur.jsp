@@ -4,33 +4,36 @@
 <%@ page import="dal.DALException" %>
 <!DOCTYPE html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<title>Carnet de bord - Erreur</title>
+<%@include file="../fragments/head.jsp"%>
+<title>QCM - Erreur</title>
 </head>
 <body>
-	<!-- Header -->
-	<header>
-  		<p class="titre1">Carnet de bord</p>
-  		<p class="titre2">Erreur</p>
-	</header>
-	<div class="col-xs-12 col-sm-9">
-		
-		<p class="error"> 
-		<%= request.getAttribute("error") %>
-		</p>
-		
-		
-	</div>
-    <div class="col-xs-12 col-sm-3">
+	<div class="container">
+		<!-- Header -->
+		<%@include file="../fragments/header.jsp"%>
 
-      	<!-- Menu -->
-      	<div class="menu">
-      		<h3>Menu</h3>
-      		<a href="/ProjetQCM">Accueil</a></br>
-      		<a href="/ProjetQCM/connexion">Connexion</a>
-      	</div>
+		<!-- Menu -->
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+		        		<a class="nav-link" href="/ProjetQCM/connexion">Connexion</a>
+		      		</li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="col-12">
+			<p class="error"> 
+				<%= request.getAttribute("error") %>
+			</p>
+		</div>
 	</div>
+	
+	<%@include file="../fragments/script.jsp"%>
 </body>
-</html></html>
+</html>
