@@ -326,4 +326,16 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 		
 	}
 
+	@Override
+	public List<Proposition> selectByEstBonne(int idQuestion) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateNote(int idEpreuve, int note) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

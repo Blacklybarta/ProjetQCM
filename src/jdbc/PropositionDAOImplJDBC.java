@@ -238,7 +238,7 @@ public class PropositionDAOImplJDBC implements DAO<Proposition> {
 				proposition.setEstBonne(rs.getBoolean("estBonne"));
 				proposition.setIdProposition(rs.getInt("idproposition"));
 				proposition.setEnonce(rs.getString("enonce"));
-				// proposition.setQuestion(rs.getBoolean("estBonne"));
+				proposition.setQuestion(rs.getInt("idquestion"));
 
 				listePropositions.add(proposition);
 			}
@@ -256,6 +256,18 @@ public class PropositionDAOImplJDBC implements DAO<Proposition> {
 			closeConnection();
 		}
 		return listePropositions;
+	}
+
+	@Override
+	public void updateEtat(Proposition data) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateNote(int idEpreuve, int note) throws DALException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

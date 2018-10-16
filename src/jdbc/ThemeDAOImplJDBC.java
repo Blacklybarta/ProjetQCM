@@ -241,4 +241,25 @@ public class ThemeDAOImplJDBC implements DAO<Theme>{
 		return null;
 	}
 
+
+	@Override
+	public void updateEtat(Theme data) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public List<Proposition> selectByEstBonne(int idQuestion) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void updateNote(int idEpreuve, int note) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

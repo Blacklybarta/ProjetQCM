@@ -1,5 +1,8 @@
 package bo;
 
+import dal.DALException;
+import dal.DAOFactory;
+
 public class Proposition {
 
 	private int idProposition;
@@ -41,6 +44,15 @@ public class Proposition {
 
 	public void setQuestion(Question question) {
 		this.question = question;
+	}
+	
+	public void setQuestion(int idQuestion) {
+		try {
+			this.question = DAOFactory.getQuestionDAO().selectById(idQuestion);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

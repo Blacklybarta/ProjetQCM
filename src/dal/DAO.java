@@ -43,4 +43,6 @@ public interface DAO<T> {
 	public List<Proposition> selectByIdQuestion(int idQuestion);
 
 	public List<Proposition> selectByEstBonne(int idQuestion);
+
+	void updateNote(int idEpreuve, int note) throws DALException;
 }
