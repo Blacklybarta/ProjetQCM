@@ -52,7 +52,7 @@ header {
 .pen, .poubelle {
 	float: right;
 	margin-top: 3px;
-	margin-right: 8px;
+	margin-right: 10px;
 }
 
 .pen:hover, .poubelle:hover {

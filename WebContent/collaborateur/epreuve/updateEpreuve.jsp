@@ -18,7 +18,7 @@
 		<!-- Header -->
 		<%@include file="../../fragments/header.jsp"%>
 
-		<div class="col-xs-12 col-sm-9">
+		<div class="col-12">
 			<%
 				Epreuve epreuve = (Epreuve) request.getAttribute("epreuve");
 				List<Epreuve> listeEpreuve = (ArrayList<Epreuve>) request.getAttribute("listeEpreuves");
@@ -133,7 +133,6 @@
 				}
 			%>
 		</div>
-		<div class="col-xs-12 col-sm-3"></div>
 	</div>
 
 	<%@include file="../../fragments/script.jsp"%>

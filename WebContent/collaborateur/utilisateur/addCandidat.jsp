@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import="bo.Promotion"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
@@ -21,10 +21,10 @@
 			List<Promotion> listePromotion = (ArrayList<Promotion>) request.getAttribute("listePromotions");
 		%>
 		<div class="col-12">
-			<h2>Création d'un candidat</h2>
-			<p>Rentrer les informations du candidat que vous souhaitez créer.</p>
+			<h2>CrÃ©ation d'un candidat</h2>
+			<p>Rentrer les informations du candidat que vous souhaitez crÃ©er.</p>
 			<div class="contenuAccueil">
-				<form action="/ProjetQCM/collaborateur/addCandidat" method="post">
+				<form id="formulaireCreationUtilisateur" action="/ProjetQCM/collaborateur/addCandidat" method="post">
 					<div class="row">
 						<div class="col-12 col-sm-2">
 							<Label for="nom">Nom </Label>
@@ -96,7 +96,7 @@
 						<div class="col-12">
 							<a href="<%=request.getContextPath()%>/validerAcces"><button
 									class="btn btn-secondary" type="button">Annuler</button></a>
-							<button class="btn btn-primary" type="submit">Créer</button>
+							<button id="boutonCreerUtilisateur" class="btn btn-primary" type="submit">CrÃ©er</button>
 						</div>
 					</div>
 				</form>
