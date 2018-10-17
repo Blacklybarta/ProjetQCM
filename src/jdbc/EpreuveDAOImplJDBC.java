@@ -376,8 +376,10 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 		// TODO Auto-generated method stub
 	}
 
-	@Override
-	public void updateMarque(boolean mark, int idQuestion, int idEpreuve) {
+	
+
+	
+	public void updateMarque(boolean mark, int idQuestion, int idEpreuve) throws DALException {
 		// TODO Auto-generated method stub
 		
 	}
