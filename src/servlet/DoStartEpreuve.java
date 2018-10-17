@@ -40,26 +40,15 @@ public class DoStartEpreuve extends HttpServlet {
 		String questionNum = params[params.length-1];
 		
 		HttpSession session = req.getSession();
-		int nbQuestionsTotal = 0;
-		List<Section> sections = new ArrayList();
 		
 		try {
 			epreuve = DAOFactory.getEpreuveDAO().selectById(Integer.valueOf(req.getParameter("idEpreuve")));
-			sections = DAOFactory.getSectionDAO().selectByIdTest(epreuve.getIdEpreuve());
 		} catch (NumberFormatException | DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		session.setAttribute("currentEpreuveId", epreuve.getIdEpreuve());
-
-		//Calcul du nombre de questions dans le test
-		for (Section section : sections)
-		{
-			nbQuestionsTotal += section.getNbQuestionATirer();
-		}
-		
-		session.setAttribute("nbQuestionsTotal", nbQuestionsTotal);
 		
 		//marquer la question
 		if (req.getParameterMap().containsKey("mark"))
@@ -137,11 +126,11 @@ public class DoStartEpreuve extends HttpServlet {
 			{
 				updateAnswers(req.getParameterValues("proposition"), session, req.getParameter("idQuestion"));
 			}
+
+			recupererQuestion(session, Integer.valueOf(questionNum));
 			
-			if (Integer.valueOf(questionNum) <= nbQuestionsTotal)
+			if (Integer.valueOf(questionNum) <= allQuestions.size())
 			{
-				recupererQuestion(session, Integer.valueOf(questionNum));
-				
 				System.out.println("Questions total : " + allQuestions.size() + " current : " + questionNum);
 				
 				this.getServletContext().getRequestDispatcher("/candidat/epreuve/question.jsp").forward(req, resp);
