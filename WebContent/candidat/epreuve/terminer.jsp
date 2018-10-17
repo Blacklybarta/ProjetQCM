@@ -8,24 +8,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<title>Résultats</title>
+	<%@include file="../../fragments/head.jsp"%>
+	<title>QCM - Epreuve terminée</title>
 </head>
 <body>
-	<div class="col-xs-12 col-sm-9">
-		<div class="contenu">
-			<h3>Résultat de l'épreuve ${epreuve.test.libelle}</h3>
-		
-			<h2>La note reçue est ${note}</h2>
+	<div class="container">
+		<!-- Header -->
+		<%@include file="../../fragments/header.jsp"%>
+
+		<div class="col-12">
+				<h2>Résultat de l'épreuve ${epreuve.test.libelle}</h2>
 			
+				<h3>La note reçue est ${note}</h3>
 		</div>
-	</div>
-	
-	<div class="col-xs-12 col-sm-3">
-		<!-- Menu -->
-		<%@include file="../../fragments/menu.jsp" %>
 	</div>
 </body>
 </html>

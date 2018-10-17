@@ -35,7 +35,7 @@
 	
 										<form action="epreuve" method="POST">
 											<input type="hidden" name="idEpreuve" value="${epreuve.idEpreuve}" />
-											<button type="submit">Passer cette épreuve</button>
+											<button class="btn btn-primary" type="submit">Passer cette épreuve</button>
 										</form>
 									</li>
 								</ul>
@@ -51,7 +51,7 @@
 										
 										<form action="epreuve" method="POST">
 											<input type="hidden" name="idEpreuve" value="${epreuve.idEpreuve}" />
-											<button type="submit">Continuer cette épreuve</button>
+											<button class="btn btn-primary" type="submit">Continuer cette épreuve</button>
 										</form>
 									</li>
 								</ul>
