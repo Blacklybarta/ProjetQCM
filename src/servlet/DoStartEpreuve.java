@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -68,6 +69,11 @@ public class DoStartEpreuve extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		
+		if (null == session.getAttribute("answers"))
+		{
+			session.setAttribute("answers", new ArrayList() {{ add(new ArrayList() {{ add("-1"); }}); }});
 		}
 		
 		if (questionNum.equals("start"))
@@ -148,6 +154,7 @@ public class DoStartEpreuve extends HttpServlet {
 	
 	private int calculNote(HttpSession session) {
 		int note = 0;
+		int total = 0;
 		
 		ArrayList<ArrayList<String>> answers = new ArrayList<ArrayList<String>>();
 		
@@ -201,8 +208,13 @@ public class DoStartEpreuve extends HttpServlet {
 				{
 					note += question.getPoints();
 				}
+				
+				total += question.getPoints();
 			}
 		}
+		
+		//Pourcentagation
+		note = (note / total)*100;
 		
 		return note;
 	}
@@ -217,6 +229,19 @@ public class DoStartEpreuve extends HttpServlet {
 		
 		if (results != null)
 		{
+			int i = 0;
+			
+			//suppression de la liste si question déjà répondue
+			for (Iterator<ArrayList<String>> iter = answers.listIterator(); iter.hasNext();)
+			{
+				ArrayList<String> nanswer = iter.next();
+				if (nanswer.get(0).equals(idQuestion))
+				{
+					iter.remove();
+				}
+				i ++;
+			}
+			
 			for (String result : results) {
 				answer.add(result); 
 			}

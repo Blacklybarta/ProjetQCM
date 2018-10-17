@@ -348,4 +348,16 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 		// TODO Auto-generated method stub	
 	}
 
+	@Override
+	public void updateMarque(boolean mark, int idQuestion, int idEpreuve) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<QuestionTirage> selectAllByIdEpreuve(int idEpreuve) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

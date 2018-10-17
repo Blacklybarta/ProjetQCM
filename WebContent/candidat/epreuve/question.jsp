@@ -27,7 +27,17 @@
 			</c:choose>
 			
 				<c:forEach items="${questionTirage.question.listeProposition}" var="proposition">
-					<input type="checkbox" value="${proposition.idProposition}" name="proposition" id="prop${proposition.idProposition}">
+					<c:set var = "chebx" value = "${0}"/>
+					<c:forEach items="${answers}" var="reponse">
+						<c:set var="idProp">${proposition.idProposition}</c:set>
+						<c:if test="${reponse.contains(idProp) && reponse[0] eq questionTirage.question.idQuestion}">
+							<input type="checkbox" value="${proposition.idProposition}" name="proposition" id="prop${proposition.idProposition}" checked>
+					<c:set var = "chebx" value = "${1}"/>
+						</c:if>
+					</c:forEach>
+						<c:if test="${chebx == 0}">
+								<input type="checkbox" value="${proposition.idProposition}" name="proposition" id="prop${proposition.idProposition}">
+						</c:if>
 					<label for="prop${proposition.idProposition}">${proposition.enonce}</label> 
 				</c:forEach> 
 
@@ -49,7 +59,6 @@
 								<button type="submit" name="mark" value="false">Démarquer la question</button>
 							</c:otherwise>
 						</c:choose>
-						
 					</c:otherwise>
 				</c:choose>
 			</form>

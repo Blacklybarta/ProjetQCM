@@ -242,10 +242,6 @@ public class PromotionDAOImplJDBC implements DAO<Promotion> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public void updateNote(int idEpreuve, int note) throws DALException {
-	}
 		
 	public Promotion selectSectionByIdTestAndIdTheme(int idTest, int idTheme) {
 		// TODO Auto-generated method stub
@@ -255,6 +251,24 @@ public class PromotionDAOImplJDBC implements DAO<Promotion> {
 	@Override
 	public void updateSectionByIdTestAndIdTheme(Promotion data, int idTest, int idTheme) throws DALException {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void updateNote(int idEpreuve, int note, String niveau) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateMarque(boolean mark, int idQuestion, int idEpreuve) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<QuestionTirage> selectAllByIdEpreuve(int idEpreuve) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

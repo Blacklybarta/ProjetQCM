@@ -31,7 +31,7 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 	private static final String SQL_SELECT_BY_CANDIDAT = "SELECT * FROM EPREUVE WHERE idUtilisateur=?";
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM EPREUVE WHERE idEpreuve=?";
 	private static final String SQL_UPDATE_ETAT = "UPDATE EPREUVE SET etat=? WHERE idepreuve=?";
-	private static final String SQL_UPDATE_NOTE = "UPDATE EPREUVE SET note_obtenu=?, niveau_obtenu=?, etat='T',  WHERE idepreuve=?";
+	private static final String SQL_UPDATE_NOTE = "UPDATE EPREUVE SET note_obtenu=?, niveau_obtenu=?, etat='T' WHERE idepreuve=?";
 	private static final String SQL_SELECTALL = "SELECT * FROM EPREUVE ";
 	private static final String SQL_INSERT = "INSERT INTO EPREUVE(dateDebutValidite, dateFinValidite, etat, idTest, idUtilisateur)VALUES(?,?,?,?,?)";
 	private static final String SQL_UPDATE = "UPDATE EPREUVE SET dateDebutValidite=?,dateFinValidite=?,etat=?,idTest=?,idUtilisateur=? WHERE idepreuve=?";
@@ -377,9 +377,15 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 	}
 
 	@Override
-	public void updateMarque(boolean mark) {
+	public void updateMarque(boolean mark, int idQuestion, int idEpreuve) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<QuestionTirage> selectAllByIdEpreuve(int idEpreuve) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

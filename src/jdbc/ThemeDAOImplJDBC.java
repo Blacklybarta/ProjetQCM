@@ -255,12 +255,6 @@ public class ThemeDAOImplJDBC implements DAO<Theme>{
 		return null;
 	}
 
-
-	@Override
-	public void updateNote(int idEpreuve, int note) throws DALException {
-		
-	}
-
 	public Theme selectSectionByIdTestAndIdTheme(int idTest, int idTheme) {
 		// TODO Auto-generated method stub
 		return null;
@@ -271,6 +265,27 @@ public class ThemeDAOImplJDBC implements DAO<Theme>{
 	public void updateSectionByIdTestAndIdTheme(Theme data, int idTest, int idTheme) throws DALException {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public void updateNote(int idEpreuve, int note, String niveau) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void updateMarque(boolean mark, int idQuestion, int idEpreuve) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public List<QuestionTirage> selectAllByIdEpreuve(int idEpreuve) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
