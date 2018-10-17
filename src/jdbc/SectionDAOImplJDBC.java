@@ -168,7 +168,8 @@ public class SectionDAOImplJDBC implements DAO<Section> {
 	}
 
 	@Override
-	public List<Section> selectByIdTest(int idtest) throws DALException {
+	public List<Section> selectByIdTest(int idtest) throws DALException
+	{
 		con = null;
 		pstmt = null;
 		ResultSet rs = null;
@@ -237,7 +238,8 @@ public class SectionDAOImplJDBC implements DAO<Section> {
 	}
 
 	@Override
-	public void updateNote(int idEpreuve, int note) throws DALException {
+	public void updateNote(int idEpreuve, int note, String niveau) throws DALException {
+		// TODO Auto-generated method stub
 		
 	}
 		

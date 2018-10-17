@@ -44,10 +44,14 @@ public interface DAO<T> {
 
 	public List<Proposition> selectByEstBonne(int idQuestion);
 
-	void updateNote(int idEpreuve, int note) throws DALException;
 	
 	public T selectSectionByIdTestAndIdTheme(int idTest, int idTheme);
 	
 	public void updateSectionByIdTestAndIdTheme(T data, int idTest, int idTheme) throws DALException;
 
+	void updateNote(int idEpreuve, int note, String niveau) throws DALException;
+
+	public void updateMarque(boolean mark, int idQuestion, int idEpreuve) throws DALException;
+
+	public List<QuestionTirage> selectAllByIdEpreuve(int idEpreuve);
 }

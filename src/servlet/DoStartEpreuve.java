@@ -23,6 +23,7 @@ public class DoStartEpreuve extends HttpServlet {
 
 	private static final String EN_COURS = "EC";
 	private static final String EN_ATTENTE = "EA";
+	Epreuve epreuve = null;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,20 +38,40 @@ public class DoStartEpreuve extends HttpServlet {
 		String questionNum = params[params.length-1];
 		
 		HttpSession session = req.getSession();
+		int nbQuestionsTotal = 0;
+		List<Section> sections = new ArrayList();
 		
-		if (questionNum.equals("start"))
+		try {
+			epreuve = DAOFactory.getEpreuveDAO().selectById(Integer.valueOf(req.getParameter("idEpreuve")));
+			sections = DAOFactory.getSectionDAO().selectByIdTest(epreuve.getIdEpreuve());
+		} catch (NumberFormatException | DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		session.setAttribute("currentEpreuveId", epreuve.getIdEpreuve());
+		
+		//Calcul du nombre de questions dans le test
+		for (Section section : sections)
 		{
-			Epreuve epreuve = null;
-			
+			nbQuestionsTotal += section.getNbQuestionATirer();
+		}
+		
+		session.setAttribute("nbQuestionsTotal", nbQuestionsTotal);
+		
+		//marquer la question
+		if (req.getParameterMap().containsKey("mark"))
+		{
 			try {
-				epreuve = DAOFactory.getEpreuveDAO().selectById(Integer.valueOf(req.getParameter("idEpreuve")));
+				DAOFactory.getQuestionTirageDAO().updateMarque(Boolean.valueOf(req.getParameter("mark")), Integer.valueOf(req.getParameter("idQuestion")), Integer.valueOf(req.getParameter("idEpreuve")));
 			} catch (NumberFormatException | DALException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			session.setAttribute("currentEpreuveId", epreuve.getIdEpreuve());
-			
+		}
+		
+		if (questionNum.equals("start"))
+		{	
 			if (epreuve.getEtat().equals(EN_ATTENTE))
 			{
 				generateQuestions(epreuve);
@@ -69,6 +90,8 @@ public class DoStartEpreuve extends HttpServlet {
 		else if(questionNum.equals("terminer"))
 		{
 			int note;
+			int epreuveId = epreuve.getIdEpreuve();
+			String niveau;
 			
 			updateAnswers(req.getParameterValues("proposition"), session, req.getParameter("idQuestion"));
 			
@@ -76,8 +99,21 @@ public class DoStartEpreuve extends HttpServlet {
 			
 			System.out.println("note : " + note);
 			
+			if(note >= epreuve.getTest().getSeuilHaut())
+			{
+				niveau = "A";
+			}
+			else if (note <= epreuve.getTest().getSeuilBas())
+			{
+				niveau = "NA";
+			}
+			else
+			{
+				niveau = "ECA";
+			}
+			
 			try {
-				DAOFactory.getEpreuveDAO().updateNote((Integer) session.getAttribute("currentEpreuveId"), note);
+				DAOFactory.getEpreuveDAO().updateNote(epreuveId, note, niveau);
 			} catch (DALException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -89,20 +125,6 @@ public class DoStartEpreuve extends HttpServlet {
 		}
 		else if(isNumeric(questionNum))
 		{
-			int nbQuestionsTotal = 0;
-			List<Section> sections = new ArrayList();
-			
-			try {
-				sections = DAOFactory.getSectionDAO().selectByIdTest((Integer) session.getAttribute("currentEpreuveId"));
-			} catch (NumberFormatException | DALException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			for (Section section : sections)
-			{
-				nbQuestionsTotal += section.getNbQuestionATirer();
-			}
 			
 			if (req.getParameterValues("proposition") != null)
 			{
@@ -110,8 +132,6 @@ public class DoStartEpreuve extends HttpServlet {
 			}
 			
 			System.out.println("Questions total : " + nbQuestionsTotal + " current : " + questionNum);
-			
-			session.setAttribute("nbQuestionsTotal", nbQuestionsTotal);
 			
 			if (Integer.valueOf(questionNum) <= nbQuestionsTotal)
 			{
@@ -220,13 +240,16 @@ public class DoStartEpreuve extends HttpServlet {
 
 	private void recupererQuestion(HttpSession session, int numQuestion)
 	{
-		int epreuveId = (Integer) session.getAttribute("currentEpreuveId");
+		int epreuveId = epreuve.getIdEpreuve();
 		System.out.println(epreuveId);
 		QuestionTirage question = null;
+		List<QuestionTirage> allQuestions = new ArrayList();
 		
 		question = DAOFactory.getQuestionTirageDAO().selectByIdEpreuve(epreuveId, numQuestion);
+		allQuestions = DAOFactory.getQuestionTirageDAO().selectAllByIdEpreuve(epreuve.getIdEpreuve());
 
 		session.setAttribute("questionTirage", question);
+		session.setAttribute("allQuestions", allQuestions);
 	}
 	
 	private void generateQuestions(Epreuve epreuve)

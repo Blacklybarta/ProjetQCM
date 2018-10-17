@@ -27,6 +27,8 @@ public class QuestionTirageDAOImplJDBC implements DAO<QuestionTirage> {
 	
 	private static final String SQL_INSERT = "INSERT INTO QUESTION_TIRAGE(estmarquee,numordre,idepreuve,idquestion)VALUES(0,?,?,?)";
 	private static final String SQL_SELECT_BY_IDEPREUVE_NUMORDRE = "SELECT * FROM QUESTION_TIRAGE WHERE idEpreuve=? AND numordre=?";
+	private static final String SQL_SELECT_BY_IDEPREUVE = "SELECT * FROM QUESTION_TIRAGE WHERE idEpreuve=?";
+	private static final String SQL_UPDATE_EST_MARQUEE = "UPDATE QUESTION_TIRAGE SET estmarquee=? WHERE idquestion=? AND idepreuve=?";
 	
 	public void closeConnection() {
 		if (con != null) {
@@ -198,9 +200,75 @@ public class QuestionTirageDAOImplJDBC implements DAO<QuestionTirage> {
 	}
 
 	@Override
-
-	public void updateNote(int idEpreuve, int note) throws DALException {
+	public void updateNote(int idEpreuve, int note, String niveau) throws DALException {
+		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void updateMarque(boolean mark, int idQuestion, int idEpreuve) throws DALException {
+		con = null;
+		pstmt = null;
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_UPDATE_EST_MARQUEE);
+			pstmt.setBoolean(1, mark);
+			pstmt.setInt(2, idQuestion);
+			pstmt.setInt(3, idEpreuve);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new DALException("Update theme failed - " + idEpreuve, e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}		
+	}
+	
+	@Override
+	public List<QuestionTirage> selectAllByIdEpreuve(int idEpreuve)
+	{
+		con = null;
+		pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_SELECT_BY_IDEPREUVE);
+			pstmt.setInt(1, idEpreuve);
+
+			rs = pstmt.executeQuery();
+			while (rs.next())
+			{
+				QuestionTirage question = new QuestionTirage();
+				
+				question.setEpreuve(rs.getInt("idepreuve"));
+				question.setEstMarquee(rs.getByte("estmarquee")!=0);
+				question.setNumOrdre(rs.getInt("numordre"));
+				question.setQuestion(rs.getInt("idquestion"));
+				
+				questionTirage.add(question);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}
+		return questionTirage;
 	}
 
 	public QuestionTirage selectSectionByIdTestAndIdTheme(int idTest, int idTheme) {

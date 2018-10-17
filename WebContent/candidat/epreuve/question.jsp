@@ -8,10 +8,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<title>Question n°${questionTirage.numOrdre}</title>
+	<title>Question n°${questionTirage.numOrdre}</title>
 </head>
 <body>
 	<div class="col-xs-12 col-sm-9">
@@ -19,9 +16,6 @@
 			<h3>Question n°${questionTirage.numOrdre}</h3>
 		
 			<h2>${questionTirage.question.enonce}</h2>
-			
-			${nbQuestionsTotal}
-			${questionTirage.numOrdre}
 			
 			<c:choose>
 				<c:when test="${nbQuestionsTotal == questionTirage.numOrdre}">
@@ -35,9 +29,10 @@
 				<c:forEach items="${questionTirage.question.listeProposition}" var="proposition">
 					<input type="checkbox" value="${proposition.idProposition}" name="proposition" id="prop${proposition.idProposition}">
 					<label for="prop${proposition.idProposition}">${proposition.enonce}</label> 
-				</c:forEach>
+				</c:forEach> 
 
 				<input type="hidden" name="idQuestion" value="${questionTirage.question.idQuestion}" />
+				<input type="hidden" name="idEpreuve" value="${epreuve.idEpreuve}" />
 					
 				<c:choose>
 					<c:when test="${nbQuestionsTotal == questionTirage.numOrdre}">
@@ -45,15 +40,36 @@
 					</c:when>
 					<c:otherwise>
 						<button type="submit">Question Suivante</button>
+						
+						<c:choose>
+							<c:when test="${questionTirage.estMarquee == false}">
+								<button type="submit" name="mark" value="true">Marquer la question</button>
+							</c:when>
+							<c:otherwise>
+								<button type="submit" name="mark" value="false">Démarquer la question</button>
+							</c:otherwise>
+						</c:choose>
+						
 					</c:otherwise>
 				</c:choose>
 			</form>
+				
+			<p>Questions :</p>
+			<c:forEach begin="1" end="${nbQuestionsTotal}" varStatus="loop">
+				<form action="../question/${loop.index}" method="POST">
+					<input type="hidden" name="idEpreuve" value="${epreuve.idEpreuve}" />
+					<input type="hidden"  name="idQuestion" value="${questionTirage.question.idQuestion}" />
+					<c:choose>
+						<c:when test="${allQuestions[loop.index-1].estMarquee == true}">
+							<button type="submit" name="idQuestion" value="${questionTirage.question.idQuestion}">${loop.index}*</button>
+						</c:when>
+						<c:otherwise>
+							<button type="submit">${loop.index}</button>
+						</c:otherwise>
+					</c:choose>
+				</form>
+			</c:forEach>
 		</div>
-	</div>
-	
-	<div class="col-xs-12 col-sm-3">
-		<!-- Menu -->
-		<%@include file="../../fragments/menu.jsp" %>
 	</div>
 </body>
 </html>

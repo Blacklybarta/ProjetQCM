@@ -333,7 +333,8 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 	}
 
 	@Override
-	public void updateNote(int idEpreuve, int note) throws DALException {
+	public void updateNote(int idEpreuve, int note, String niveau) throws DALException {
+		// TODO Auto-generated method stub
 		
 	}
 

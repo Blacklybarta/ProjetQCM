@@ -31,7 +31,7 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 	private static final String SQL_SELECT_BY_CANDIDAT = "SELECT * FROM EPREUVE WHERE idUtilisateur=?";
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM EPREUVE WHERE idEpreuve=?";
 	private static final String SQL_UPDATE_ETAT = "UPDATE EPREUVE SET etat=? WHERE idepreuve=?";
-	private static final String SQL_UPDATE_NOTE = "UPDATE EPREUVE SET note_obtenu=? WHERE idepreuve=?";
+	private static final String SQL_UPDATE_NOTE = "UPDATE EPREUVE SET note_obtenu=?, niveau_obtenu=?, etat='T',  WHERE idepreuve=?";
 	private static final String SQL_SELECTALL = "SELECT * FROM EPREUVE ";
 	private static final String SQL_INSERT = "INSERT INTO EPREUVE(dateDebutValidite, dateFinValidite, etat, idTest, idUtilisateur)VALUES(?,?,?,?,?)";
 	private static final String SQL_UPDATE = "UPDATE EPREUVE SET dateDebutValidite=?,dateFinValidite=?,etat=?,idTest=?,idUtilisateur=? WHERE idepreuve=?";
@@ -340,14 +340,15 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 	}
 	
 	@Override
-	public void updateNote(int idEpreuve, int note) throws DALException {
+	public void updateNote(int idEpreuve, int note, String niveau) throws DALException {
 		con = null;
 		pstmt = null;
 		try {
 			con = DBConnection.getConnection();
 			pstmt = con.prepareStatement(SQL_UPDATE_NOTE);
-			pstmt.setInt(1, note);			
-			pstmt.setInt(2, idEpreuve);
+			pstmt.setInt(1, note);
+			pstmt.setString(2, niveau);			
+			pstmt.setInt(3, idEpreuve);
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -373,6 +374,12 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 	@Override
 	public void updateSectionByIdTestAndIdTheme(Epreuve data, int idTest, int idTheme) throws DALException {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void updateMarque(boolean mark) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

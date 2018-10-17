@@ -285,7 +285,7 @@ public class PropositionDAOImplJDBC implements DAO<Proposition> {
 	}
 
 	@Override
-	public void updateNote(int idEpreuve, int note) throws DALException {
+	public void updateNote(int idEpreuve, int note, String niveau) throws DALException {
 		// TODO Auto-generated method stub
 	}
 
