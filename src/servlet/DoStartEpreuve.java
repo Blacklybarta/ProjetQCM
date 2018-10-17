@@ -25,6 +25,7 @@ public class DoStartEpreuve extends HttpServlet {
 	private static final String EN_COURS = "EC";
 	private static final String EN_ATTENTE = "EA";
 	Epreuve epreuve = null;
+	List<QuestionTirage> allQuestions = new ArrayList();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -51,7 +52,7 @@ public class DoStartEpreuve extends HttpServlet {
 		}
 		
 		session.setAttribute("currentEpreuveId", epreuve.getIdEpreuve());
-		
+
 		//Calcul du nombre de questions dans le test
 		for (Section section : sections)
 		{
@@ -137,11 +138,11 @@ public class DoStartEpreuve extends HttpServlet {
 				updateAnswers(req.getParameterValues("proposition"), session, req.getParameter("idQuestion"));
 			}
 			
-			System.out.println("Questions total : " + nbQuestionsTotal + " current : " + questionNum);
-			
 			if (Integer.valueOf(questionNum) <= nbQuestionsTotal)
 			{
 				recupererQuestion(session, Integer.valueOf(questionNum));
+				
+				System.out.println("Questions total : " + allQuestions.size() + " current : " + questionNum);
 				
 				this.getServletContext().getRequestDispatcher("/candidat/epreuve/question.jsp").forward(req, resp);
 			}
@@ -268,7 +269,6 @@ public class DoStartEpreuve extends HttpServlet {
 		int epreuveId = epreuve.getIdEpreuve();
 		System.out.println(epreuveId);
 		QuestionTirage question = null;
-		List<QuestionTirage> allQuestions = new ArrayList();
 		
 		question = DAOFactory.getQuestionTirageDAO().selectByIdEpreuve(epreuveId, numQuestion);
 		allQuestions = DAOFactory.getQuestionTirageDAO().selectAllByIdEpreuve(epreuve.getIdEpreuve());

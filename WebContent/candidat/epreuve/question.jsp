@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:useBean id="now" class="java.util.Date"/>
 <%@ page import="bo.Epreuve" %>
 
@@ -18,7 +19,7 @@
 			<h2>${questionTirage.question.enonce}</h2>
 			
 			<c:choose>
-				<c:when test="${nbQuestionsTotal == questionTirage.numOrdre}">
+				<c:when test="${fn:length(allQuestions) == questionTirage.numOrdre}">
 					<form action="../question/terminer" method="POST">
 				</c:when>
 				<c:otherwise>
@@ -45,7 +46,7 @@
 				<input type="hidden" name="idEpreuve" value="${epreuve.idEpreuve}" />
 					
 				<c:choose>
-					<c:when test="${nbQuestionsTotal == questionTirage.numOrdre}">
+					<c:when test="${fn:length(allQuestions) == questionTirage.numOrdre}">
 						<button type="submit">Terminer Test</button>
 					</c:when>
 					<c:otherwise>
@@ -64,7 +65,7 @@
 			</form>
 				
 			<p>Questions :</p>
-			<c:forEach begin="1" end="${nbQuestionsTotal}" varStatus="loop">
+			<c:forEach begin="1" end="${fn:length(allQuestions)}" varStatus="loop">
 				<form action="../question/${loop.index}" method="POST">
 					<input type="hidden" name="idEpreuve" value="${epreuve.idEpreuve}" />
 					<input type="hidden"  name="idQuestion" value="${questionTirage.question.idQuestion}" />
