@@ -24,10 +24,10 @@ header, .card-header {
 }
 
 .cardUtilisateurs {
-	max-height: 600px;
+	height: 600px;
 }
 
-.cardUtilisateurs card-body, .cardQuestions card-body, .cardThemes card-body {
+.cardUtilisateurs .card-body, .cardQuestions .card-body, .cardThemes .card-body {
 	overflow: auto;
 }
 
