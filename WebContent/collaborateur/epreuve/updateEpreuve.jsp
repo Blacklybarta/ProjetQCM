@@ -24,7 +24,7 @@
 				List<Epreuve> listeEpreuve = (ArrayList<Epreuve>) request.getAttribute("listeEpreuves");
 				List<Utilisateur> listeUtilisateur = (ArrayList<Utilisateur>) request.getAttribute("listeUtilisateurs");
 				List<Test> listeTest = (ArrayList<Test>) request.getAttribute("listeTests");
-				DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+				DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 			%>
 			<h2>Modification d'une épreuve</h2>
 			<%
@@ -66,7 +66,7 @@
 						<Label for="dateDebut">Date de début </Label>
 					</div>
 					<div class="col-12 col-sm-10">
-						<input type="text" name="dateDebut"
+						<input type="date" name="dateDebut"
 							value="<%=df.format(epreuve.getDateDebutValidite().getTime())%>"
 							required>
 					</div>
@@ -76,7 +76,7 @@
 						<Label for="dateFin">Date de fin </Label>
 					</div>
 					<div class="col-12 col-sm-10">
-						<input type="text" name="dateFin"
+						<input type="date" name="dateFin"
 							value="<%=df.format(epreuve.getDateFinValidite().getTime())%>"
 							required>
 					</div>

@@ -31,7 +31,7 @@
 							<Label for="dateDebut">Date de début </Label>
 						</div>
 						<div class="col-12 col-sm-10">
-							<input type="text" name="dateDebut" value="" required>
+							<input type="date" name="dateDebut" value="" required>
 						</div>
 					</div>
 					<div class="row">
@@ -39,7 +39,7 @@
 							<Label for="dateFin">Date de fin </Label>
 						</div>
 						<div class="col-12 col-sm-10">
-							<input type="text" name="dateFin" value="" required>
+							<input type="date" name="dateFin" value="" required>
 						</div>
 					</div>
 

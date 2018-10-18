@@ -47,10 +47,10 @@ public class DoCreerEpreuve extends HttpServlet {
 			Epreuve epreuve = new Epreuve();
 			Test test = new Test();
 			Utilisateur utilisateur = new Utilisateur();
-			LocalDate debut = generateDate(req.getParameter("dateDebut"));
-			LocalDate fin = generateDate(req.getParameter("dateFin"));
-			epreuve.setDateDebutValidite(Date.valueOf(debut));
-			epreuve.setDateFinValidite(Date.valueOf(fin));
+			Date debut = Date.valueOf(req.getParameter("dateDebut"));
+			Date fin = Date.valueOf(req.getParameter("dateFin"));
+			epreuve.setDateDebutValidite(debut);
+			epreuve.setDateFinValidite(fin);
 			epreuve.setEtat("EA");
 			test.setIdTest(Integer.parseInt(req.getParameter("idTest")));
 			epreuve.setTest(test);
@@ -63,54 +63,7 @@ public class DoCreerEpreuve extends HttpServlet {
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
-
 	}
 
-	private LocalDate generateDate(String saisie) {
-		String[] tabData = saisie.split("/");
-		LocalDate date = null;
-		switch (tabData[1]) {
-		case "1":
-			date = LocalDate.of(Integer.parseInt(tabData[2]), Month.JANUARY, Integer.parseInt(tabData[0]));
-			break;
-		case "2":
-			date = LocalDate.of(Integer.parseInt(tabData[2]), Month.FEBRUARY, Integer.parseInt(tabData[0]));
-			break;
-		case "3":
-			date = LocalDate.of(Integer.parseInt(tabData[2]), Month.MARCH, Integer.parseInt(tabData[0]));
-			break;
-		case "4":
-			date = LocalDate.of(Integer.parseInt(tabData[2]), Month.APRIL, Integer.parseInt(tabData[0]));
-			break;
-		case "5":
-			date = LocalDate.of(Integer.parseInt(tabData[2]), Month.MAY, Integer.parseInt(tabData[0]));
-			break;
-		case "6":
-			date = LocalDate.of(Integer.parseInt(tabData[2]), Month.JUNE, Integer.parseInt(tabData[0]));
-			break;
-		case "7":
-			date = LocalDate.of(Integer.parseInt(tabData[2]), Month.JULY, Integer.parseInt(tabData[0]));
-			break;
-		case "8":
-			date = LocalDate.of(Integer.parseInt(tabData[2]), Month.AUGUST, Integer.parseInt(tabData[0]));
-			break;
-		case "9":
-			date = LocalDate.of(Integer.parseInt(tabData[2]), Month.SEPTEMBER, Integer.parseInt(tabData[0]));
-			break;
-		case "10":
-			date = LocalDate.of(Integer.parseInt(tabData[2]), Month.OCTOBER, Integer.parseInt(tabData[0]));
-			break;
-		case "11":
-			date = LocalDate.of(Integer.parseInt(tabData[2]), Month.NOVEMBER, Integer.parseInt(tabData[0]));
-			break;
-		case "12":
-			date = LocalDate.of(Integer.parseInt(tabData[2]), Month.DECEMBER, Integer.parseInt(tabData[0]));
-			break;
-		default:
-			date = LocalDate.now();
-			break;
-		}
-		return date;
-	}
 
 }

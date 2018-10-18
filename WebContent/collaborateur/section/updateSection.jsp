@@ -39,8 +39,8 @@
 							<%
 								for (Section u : listeSection) {
 							%>
-							<option value="<%=u.getTest().getIdTest()+""+u.getTheme().getIdTheme()%>"><%="Test : "+u.getTest().getLibelle() +
-							", " + "Theme : "+u.getTheme().getLibelle()%></option>
+							<option
+								value="<%=u.getTest().getIdTest() + "" + u.getTheme().getIdTheme()%>"><%="Test : " + u.getTest().getLibelle() + ", " + "Theme : " + u.getTheme().getLibelle()%></option>
 							<%
 								}
 							%>
@@ -64,13 +64,15 @@
 				action="/ProjetQCM/collaborateur/updateSection" method="post">
 				<div class="row">
 					<div class="col-12 col-sm-2">
-						<label for="nbQuestions">Nombre de quesions à tirer pour la section</label>
+						<label for="nbQuestions">Nombre de quesions à tirer pour
+							la section</label>
 					</div>
 					<div class="col-12 col-sm-10">
-						<input type="number" name="nbQuestions" step="1" min="0" value="<%=section.getNbQuestionATirer()%>" required>
+						<input type="number" name="nbQuestions" step="1" min="0"
+							value="<%=section.getNbQuestionATirer()%>" required>
 					</div>
 				</div>
-			
+
 				<div class="row">
 					<div class="col-12 col-sm-2">
 						<label>Thème de la section</label>
@@ -106,10 +108,13 @@
 						</select>
 					</div>
 				</div>
-				<input type="hidden" name="update" value="true" />
-				<input type="hidden" name="id" value="<%=request.getAttribute("idSection")%>" />
-				<a href="<%=request.getContextPath()%>/collaborateur/updateSection"><button class="btn btn-secondary" type="button ">Retour</button></a>
-				<button class="btn btn-primary" type="submit">Créer la section</button>
+				<input type="hidden" name="update" value="true" /> <input
+					type="hidden" name="id"
+					value="<%=request.getAttribute("idSection")%>" /> <a
+					href="<%=request.getContextPath()%>/collaborateur/updateSection"><button
+						class="btn btn-secondary" type="button">Annuler</button></a>
+				<button class="btn btn-primary" type="submit">Créer la
+					section</button>
 			</form>
 			<%
 				}

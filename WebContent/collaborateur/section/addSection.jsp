@@ -29,7 +29,7 @@
 			<form action="/ProjetQCM/collaborateur/addSection" method="post">
 				<div class="row">
 					<div class="col-12 col-sm-2">
-						<label for="nbQuestions">Nombre de quesions à tirer pour la section</label>
+						<label for="nbQuestions">Nombre de questions</label>
 					</div>
 					<div class="col-12 col-sm-10">
 						<input type="number" name="nbQuestions" step="1" min="0" value="1" required>
@@ -72,7 +72,8 @@
 					</div>
 				</div>
 				
-				<a href="<%=request.getContextPath()%>/validerAcces"><button class="btn btn-secondary" type="button ">Retour</button></a>
+				<a href="<%=request.getContextPath()%>/validerAcces"><button
+								class="btn btn-secondary" type="button">Retour</button></a>
 				<button class="btn btn-primary" type="submit">Créer la section</button>
 			</form>
 		</div> 
