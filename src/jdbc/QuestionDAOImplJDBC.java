@@ -32,7 +32,7 @@ public class QuestionDAOImplJDBC implements DAO<Question>{
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM QUESTION WHERE idquestion=?";
 	private static final String SQL_SELECT_BY_THEME_RANDOM = "SELECT TOP # * FROM QUESTION WHERE idTheme=? ORDER BY NEWID()";
 	private static final String SQL_UPDATE = "UPDATE QUESTION SET enonce=?,points=?,idtheme=? WHERE idquestion=?";
-
+	private static final String SQL_DELETE = "DELETE FROM QUESTION WHERE idquestion=?";
 	
 	public void closeConnection() {
 		if (con != null) {
@@ -119,8 +119,25 @@ public class QuestionDAOImplJDBC implements DAO<Question>{
 
 	@Override
 	public void delete(int id) throws DALException {
-		// TODO Auto-generated method stub
-		
+		con = null;
+		pstmt = null;
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_DELETE);
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new DALException("delete question failed - " + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}
 	}
 
 	@Override

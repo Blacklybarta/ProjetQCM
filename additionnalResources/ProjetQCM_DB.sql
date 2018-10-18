@@ -169,13 +169,13 @@ ON DELETE CASCADE
 ALTER TABLE PROPOSITION
     ADD CONSTRAINT proposition_question_fk FOREIGN KEY ( idquestion )
         REFERENCES question ( idquestion )
-ON DELETE NO ACTION 
+ON DELETE CASCADE 
     ON UPDATE no action 
 
 ALTER TABLE QUESTION
     ADD CONSTRAINT question_theme_fk FOREIGN KEY ( idtheme )
         REFERENCES theme ( idtheme )
-ON DELETE NO ACTION 
+ON DELETE CASCADE
     ON UPDATE no action 
 
 ALTER TABLE QUESTION_TIRAGE

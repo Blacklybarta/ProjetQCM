@@ -29,6 +29,7 @@ public class ThemeDAOImplJDBC implements DAO<Theme>{
 	private static final String SQL_SELECTALL = "SELECT * FROM THEME ORDER BY libelle";
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM THEME WHERE idTheme=?";
 	private static final String SQL_UPDATE = "UPDATE THEME SET libelle=? WHERE idtheme=?";
+	private static final String SQL_DELETE = "DELETE FROM THEME WHERE idtheme=?";
 	
 	public void closeConnection() {
 		if (con != null) {
@@ -104,8 +105,25 @@ public class ThemeDAOImplJDBC implements DAO<Theme>{
 
 	@Override
 	public void delete(int id) throws DALException {
-		// TODO Auto-generated method stub
-		
+		con = null;
+		pstmt = null;
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_DELETE);
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new DALException("delete theme failed - " + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}
 	}
 
 	@Override
