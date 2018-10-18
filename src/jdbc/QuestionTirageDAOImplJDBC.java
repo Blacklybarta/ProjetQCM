@@ -281,4 +281,10 @@ public class QuestionTirageDAOImplJDBC implements DAO<QuestionTirage> {
 		// TODO Auto-generated method stub		
 	}
 
+	@Override
+	public void deleteByIdTestAndIdTheme(int idTest, int idTheme) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

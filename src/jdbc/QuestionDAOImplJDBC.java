@@ -330,4 +330,10 @@ public class QuestionDAOImplJDBC implements DAO<Question>{
 		return null;
 	}
 
+	@Override
+	public void deleteByIdTestAndIdTheme(int idTest, int idTheme) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

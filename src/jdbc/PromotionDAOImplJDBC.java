@@ -289,4 +289,10 @@ public class PromotionDAOImplJDBC implements DAO<Promotion> {
 		return null;
 	}
 
+	@Override
+	public void deleteByIdTestAndIdTheme(int idTest, int idTheme) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

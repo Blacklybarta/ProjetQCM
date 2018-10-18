@@ -313,5 +313,11 @@ public class TestDAOImplJDBC implements DAO<Test> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void deleteByIdTestAndIdTheme(int idTest, int idTheme) throws DALException {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
