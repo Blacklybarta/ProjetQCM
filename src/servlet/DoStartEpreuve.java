@@ -159,13 +159,14 @@ public class DoStartEpreuve extends HttpServlet {
 			List<Proposition> bonnesPropositions = null;
 			
 			for (String answer : answerList)
-			{
+			{				
 				i++;
 				
 				if (i == 1)
 				{
-					//Récupération de la question
 					idQuestion = Integer.valueOf(answer);
+					System.out.println("i = " + i + " idquestion : " + Integer.valueOf(answer));
+					//Récupération de la question
 					try {
 						question = DAOFactory.getQuestionDAO().selectById(idQuestion);
 					} catch (DALException e) {
@@ -180,6 +181,8 @@ public class DoStartEpreuve extends HttpServlet {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+
+					System.out.println("question : " + question.getEnonce());
 				}
 				else
 				{
@@ -192,15 +195,15 @@ public class DoStartEpreuve extends HttpServlet {
 						}
 					}
 				}
-				
-				//Attribution des points
-				if (bonneReponsesDonnees == bonnesPropositions.size())
-				{
-					note += question.getPoints();
-				}
-				
-				total += question.getPoints();
 			}
+			
+			//Attribution des points
+			if (bonneReponsesDonnees == bonnesPropositions.size())
+			{
+				note += question.getPoints();
+			}
+			
+			total += question.getPoints();
 		}
 		
 		//Pourcentagation
@@ -214,6 +217,11 @@ public class DoStartEpreuve extends HttpServlet {
 		ArrayList<String> answer = new ArrayList();
 		
 		answers = (ArrayList<ArrayList<String>>) session.getAttribute("answers");
+		
+		if (answers.get(0).get(0).equals("-1"))
+		{
+			answers.remove(0);
+		}
 		
 		answer.add(idQuestion);
 		
