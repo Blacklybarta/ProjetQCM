@@ -2,7 +2,7 @@ header, .card-header {
 	background-color: grey;
 }
 
-#logo, #titre {
+#logo, #titre, .boutonQuestion {
 	display: inline-block;
 }
 

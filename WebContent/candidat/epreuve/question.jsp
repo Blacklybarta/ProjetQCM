@@ -17,10 +17,11 @@
 		<!-- Header -->
 		<%@include file="../../fragments/header.jsp"%>
 
-		<div class="col-12">
+		<div class="row">
+		<div class="col-12 col-sm-8">
 			<h2>Question n°${questionTirage.numOrdre}</h2>
 
-			<h3>${questionTirage.question.enonce}</h3>
+			<p>${questionTirage.question.enonce}</p>
 
 			<c:choose>
 				<c:when test="${fn:length(allQuestions) == questionTirage.numOrdre}">
@@ -48,6 +49,7 @@
 						name="proposition" id="prop${proposition.idProposition}">
 				</c:if>
 				<label for="prop${proposition.idProposition}">${proposition.enonce}</label>
+				<br/>
 			</c:forEach>
 
 			<input type="hidden" name="idQuestion"
@@ -73,19 +75,20 @@
 					</c:choose>
 				</c:otherwise>
 			</c:choose>
-
 			</form>
-
+			</div>
+			
+			<div class="col-12 col-sm-4">
 			<p>Questions :</p>
 			<c:forEach begin="1" end="${fn:length(allQuestions)}" varStatus="loop">
-				<form action="../question/${loop.index}" method="POST">
+				<form class="boutonQuestion" action="../question/${loop.index}" method="POST">
 					<input type="hidden" name="idEpreuve" value="${epreuve.idEpreuve}" />
 					<input type="hidden" name="idQuestion"
 						value="${questionTirage.question.idQuestion}" />
 					<c:choose>
 						<c:when test="${allQuestions[loop.index-1].estMarquee == true}">
 							<button class="btn btn-warning" type="submit" name="idQuestion"
-								value="${questionTirage.question.idQuestion}">${loop.index}*</button>
+								value="${questionTirage.question.idQuestion}">${loop.index}</button>
 						</c:when>
 						<c:otherwise>
 							<button class="btn btn-primary" type="submit">${loop.index}</button>
@@ -93,6 +96,7 @@
 					</c:choose>
 				</form>
 			</c:forEach>
+		</div>
 		</div>
 	</div>
 </body>
