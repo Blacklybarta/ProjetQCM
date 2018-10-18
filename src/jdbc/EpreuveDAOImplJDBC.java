@@ -35,6 +35,7 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 	private static final String SQL_SELECTALL = "SELECT * FROM EPREUVE ";
 	private static final String SQL_INSERT = "INSERT INTO EPREUVE(dateDebutValidite, dateFinValidite, etat, idTest, idUtilisateur)VALUES(?,?,?,?,?)";
 	private static final String SQL_UPDATE = "UPDATE EPREUVE SET dateDebutValidite=?,dateFinValidite=?,etat=?,idTest=?,idUtilisateur=? WHERE idepreuve=?";
+	private static final String SQL_DELETE = "DELETE FROM EPREUVE WHERE idepreuve=?";
 	
 	public void closeConnection() {
 		if (con != null) {
@@ -117,7 +118,25 @@ public class EpreuveDAOImplJDBC implements DAO<Epreuve>{
 
 	@Override
 	public void delete(int id) throws DALException {
-		// TODO Auto-generated method stub	
+		con = null;
+		pstmt = null;
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_DELETE);
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new DALException("delete epreuve failed - " + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}
 	}
 
 	@Override

@@ -33,7 +33,7 @@ public class TestDAOImplJDBC implements DAO<Test> {
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM TEST WHERE idtest=?";
 	private static final String SQL_SELECTALL = "SELECT * FROM TEST";
 	private static final String SQL_UPDATE = "UPDATE TEST SET libelle=?,description=?,duree=?,seuil_haut=?,seuil_bas=? WHERE idtest=?";
-
+	private static final String SQL_DELETE = "DELETE FROM TEST WHERE idtest=?";
 	
 	public void closeConnection() {
 		if (con != null) {
@@ -113,8 +113,25 @@ public class TestDAOImplJDBC implements DAO<Test> {
 
 	@Override
 	public void delete(int id) throws DALException {
-		// TODO Auto-generated method stub
-
+		con = null;
+		pstmt = null;
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_DELETE);
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new DALException("delete utilisateur failed - " + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}
 	}
 
 	@Override

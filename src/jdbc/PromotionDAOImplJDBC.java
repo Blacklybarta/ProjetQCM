@@ -30,6 +30,7 @@ public class PromotionDAOImplJDBC implements DAO<Promotion> {
 	private static final String SQL_SELECTALL = "SELECT * FROM PROMOTION";
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM PROMOTION WHERE codepromo=?";
 	private static final String SQL_UPDATE = "UPDATE PROMOTION SET libelle=? WHERE codepromo=?";
+	private static final String SQL_DELETE = "DELETE FROM PROMOTION WHERE codepromo=?";
 
 	public void closeConnection() {
 		if (con != null) {
@@ -107,8 +108,25 @@ public class PromotionDAOImplJDBC implements DAO<Promotion> {
 
 	@Override
 	public void delete(int id) throws DALException {
-		// TODO Auto-generated method stub
-
+		con = null;
+		pstmt = null;
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_DELETE);
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new DALException("delete promotion failed - " + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}
 	}
 
 	@Override

@@ -19,6 +19,8 @@ public interface DAO<T> {
 	public void updateEtat(T data) throws DALException ;
 	
 	public void delete(int id) throws DALException ;
+	
+	public void deleteByIdTestAndIdTheme(int idTest, int idTheme) throws DALException ;
 
 	public T selectById(int id) throws DALException ;
 	

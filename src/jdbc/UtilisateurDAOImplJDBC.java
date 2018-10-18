@@ -29,7 +29,7 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM UTILISATEUR WHERE idUtilisateur=?";
 	private static final String SQL_INSERT = "INSERT INTO UTILISATEUR(nom,prenom,email,password,isCandidat,isCollaborateur,codeProfil,codepromo) VALUES(?,?,?,?,?,?,?,?)";
 	private static final String SQL_SELECTALL = "SELECT * FROM UTILISATEUR ORDER BY nom ASC;";
-	//private static final String SQL_DELETE = "UPDATE UTILISATEUR SET administrateur=?,conducteur=? WHERE idUtilisateur=?";
+	private static final String SQL_DELETE = "DELETE FROM UTILISATEUR WHERE idutilisateur=?";
 	private static final String SQL_UPDATE = "UPDATE UTILISATEUR SET nom=?,prenom=?,email=?,password=?,isCandidat=?,isCollaborateur=?, codePromo=? WHERE idUtilisateur=?";
 
 	public void closeConnection() {
@@ -120,20 +120,14 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 	 * d'administrateur et son droit de conducteur
 	 */
 	@Override
-	public void delete(int id) throws DALException {
-		// TODO Auto-generated method stub
+	public void delete(int id) throws DALException {	
 		con = null;
 		pstmt = null;
 		try {
 			con = DBConnection.getConnection();
-			//pstmt = con.prepareStatement(SQL_DELETE);
-
-			pstmt.setBoolean(1, false);
-			pstmt.setBoolean(2, false);
-			pstmt.setInt(3, id);
-
+			pstmt = con.prepareStatement(SQL_DELETE);
+			pstmt.setInt(1, id);
 			pstmt.executeUpdate();
-
 		} catch (SQLException e) {
 			throw new DALException("delete utilisateur failed - " + e);
 		} finally {
@@ -145,7 +139,6 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 				e.printStackTrace();
 			}
 			closeConnection();
-
 		}
 	}
 
@@ -358,6 +351,12 @@ public class UtilisateurDAOImplJDBC implements DAO<Utilisateur> {
 	public List<QuestionTirage> selectAllByIdEpreuve(int idEpreuve) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void deleteByIdTestAndIdTheme(int idTest, int idTheme) throws DALException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

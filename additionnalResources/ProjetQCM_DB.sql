@@ -14,7 +14,7 @@ CREATE TABLE epreuve
      note_obtenu FLOAT , 
      niveau_obtenu NVARCHAR (50) , 
      idTest BIGINT NOT NULL , 
-     idUtilisateur BIGINT NOT NULL 
+     idUtilisateur BIGINT NOT NULL  
     )
     ON "default"
  
@@ -163,7 +163,7 @@ ON DELETE NO ACTION
 ALTER TABLE EPREUVE
     ADD CONSTRAINT epreuve_utilisateur_fk FOREIGN KEY ( idutilisateur )
         REFERENCES utilisateur ( idutilisateur )
-ON DELETE NO ACTION 
+ON DELETE CASCADE
     ON UPDATE no action 
 
 ALTER TABLE PROPOSITION
@@ -181,7 +181,7 @@ ON DELETE NO ACTION
 ALTER TABLE QUESTION_TIRAGE
     ADD CONSTRAINT question_tirage_epreuve_fk FOREIGN KEY ( idepreuve )
         REFERENCES epreuve ( idepreuve )
-ON DELETE NO ACTION 
+ON DELETE CASCADE
     ON UPDATE no action 
 
 ALTER TABLE QUESTION_TIRAGE
@@ -193,7 +193,7 @@ ON DELETE NO ACTION
 ALTER TABLE SECTION_TEST
     ADD CONSTRAINT section_test_test_fk FOREIGN KEY ( idtest )
         REFERENCES test ( idtest )
-ON DELETE NO ACTION 
+ON DELETE CASCADE
     ON UPDATE no action 
 
 ALTER TABLE SECTION_TEST
@@ -211,7 +211,7 @@ ON DELETE NO ACTION
 ALTER TABLE UTILISATEUR
     ADD CONSTRAINT utilisateur_promotion_fk FOREIGN KEY ( codepromo )
         REFERENCES promotion ( codepromo )
-ON DELETE NO ACTION 
+ON DELETE CASCADE 
     ON UPDATE no action 
 
 

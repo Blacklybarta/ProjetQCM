@@ -32,7 +32,7 @@ public class SectionDAOImplJDBC implements DAO<Section> {
 	private static final String SQL_SELECTALL = "SELECT * FROM SECTION_TEST;";
 	private static final String SQL_SELECT_BY_ID_TEST_ID_THEME = "SELECT * FROM SECTION_TEST WHERE idtest=? AND idtheme=?";
 	private static final String SQL_UPDATE_BY = "UPDATE SECTION_TEST SET nbquestionsatirer=?,idtest=?,idtheme=? WHERE idtest=? AND idtheme=?";
-	
+	private static final String SQL_DELETE_BY_ID_TEST_ID_THEME = "DELETE FROM SECTION_TEST WHERE idtest=? AND idtheme=?";
 	
 	public void closeConnection() {
 		if (con != null) {
@@ -318,5 +318,30 @@ public class SectionDAOImplJDBC implements DAO<Section> {
 	public List<QuestionTirage> selectAllByIdEpreuve(int idEpreuve) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void deleteByIdTestAndIdTheme(int idTest, int idTheme) throws DALException {
+		con = null;
+		pstmt = null;
+		try {
+			con = DBConnection.getConnection();
+			pstmt = con.prepareStatement(SQL_DELETE_BY_ID_TEST_ID_THEME);
+			pstmt.setInt(1, idTest);
+			pstmt.setInt(2, idTheme);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new DALException("delete section failed - " + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			closeConnection();
+		}
+		
 	}
 }
