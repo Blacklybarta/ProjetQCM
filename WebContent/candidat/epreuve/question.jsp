@@ -25,7 +25,7 @@
 
 			<c:choose>
 				<c:when test="${fn:length(allQuestions) == questionTirage.numOrdre}">
-					<form action="../question/terminer" method="POST">
+					<form action="../question/recap" method="POST">
 				</c:when>
 				<c:otherwise>
 					<form action="../question/${questionTirage.numOrdre + 1}"

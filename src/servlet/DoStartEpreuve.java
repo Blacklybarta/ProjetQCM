@@ -83,6 +83,15 @@ public class DoStartEpreuve extends HttpServlet {
 				
 			this.getServletContext().getRequestDispatcher("/candidat/epreuve/question.jsp").forward(req, resp);
 		}
+		else if(questionNum.equals("recap"))
+		{
+			if (req.getParameterValues("proposition") != null)
+			{
+				updateAnswers(req.getParameterValues("proposition"), session, req.getParameter("idQuestion"));
+			}
+			
+			this.getServletContext().getRequestDispatcher("/candidat/epreuve/recap.jsp").forward(req, resp);
+		}
 		else if(questionNum.equals("terminer"))
 		{
 			int note;
@@ -205,6 +214,8 @@ public class DoStartEpreuve extends HttpServlet {
 			
 			total += question.getPoints();
 		}
+
+		System.out.println("note : " + note + " total : " + total);
 		
 		//Pourcentagation
 		note = (note / total)*100;
