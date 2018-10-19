@@ -33,8 +33,13 @@
 						  	<h5 class="card-header">Liste des questions</h5>
 						  	<div class="card-body">
 						  		<% for (Question u : listeQuestion) { %>
-						  			<div>
-										<%=u.getEnonce()%> <i class="fas fa-pen pen"></i> <i class="fas fa-trash poubelle"></i>
+						  			<div class="row">
+						  				<div class="col-12 col-sm-10">
+											<%=u.getEnonce()%>
+										</div>
+										<div class="col-12 col-sm-2">
+											<i class="fas fa-pen pen"></i> <i class="fas fa-trash poubelle"></i>
+										</div>
 									</div>
 								<% } %>
 						  	</div>
@@ -46,7 +51,7 @@
 						  	<div class="card-body">
 						  		<% for (Theme u : listeTheme) { %>
 						  			<div>
-										<%=u.getLibelle()%> <i class="fas fa-pen pen"></i> <i class="fas fa-trash poubelle"></i>
+						  				<%=u.getLibelle()%> <i class="fas fa-pen pen"></i> <i class="fas fa-trash poubelle"></i>
 									</div>
 								<% } %>
 						  	</div>
